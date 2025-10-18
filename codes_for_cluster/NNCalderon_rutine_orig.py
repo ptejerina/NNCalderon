@@ -357,9 +357,9 @@ class CalderonPINN:
         
         # 4. Total Loss
         total_loss = (weights['pde'] * loss_pde +
-                    #   weights['data'] * loss_data + \
-                      weights['dirichlet_bc'] * loss_bc + \
-                      weights['neumann_bc'] * loss_nd + \
+                      weights['data'] * loss_data + \
+                    #   weights['dirichlet_bc'] * loss_bc + \
+                    #   weights['neumann_bc'] * loss_nd + \
                       weights['force_true_gamma'] * loss_force_gamma  \
                       #+ weights['tv'] * loss_tv
                     )
@@ -601,7 +601,7 @@ class Trainer:
         # self.gamma_true = load_gamma_interpolator(gamma_true)
 
 
-    def train(self, dataset, case_name, noise_level_str, train_epochs = None, disable_progress_bar = True):
+    def train(self, dataset, case_name, noise_level_str, train_epochs = None):
         dataloader = DataLoader(dataset, batch_size=self.config['batch_size_bnd'], shuffle=True)
 
         print(f"Starting training for case: {case_name}, noise: {noise_level_str}")
@@ -613,7 +613,7 @@ class Trainer:
             epochs = self.config['epochs']
 
         # Wrap epoch loop in tqdm
-        for epoch in trange(1, epochs + 1, desc="Training epochs", disable=disable_progress_bar):
+        for epoch in trange(1, epochs + 1, desc="Training epochs", disable=True):
             for bnd_batch_cpu in dataloader:
                 self.optimizer.zero_grad()
 
@@ -868,8 +868,8 @@ class Trainer:
         w = self.config['loss_weights']
 
         DE_loss = w['pde'] * np.array(loss['pde'])
-        f_bc_loss = w['dirichlet_bc'] * np.array(loss['bc'])
-        J_bc_loss = w['neumann_bc'] * np.array(loss['neumann'])
+        f_bc_loss = w['data'] * np.array(loss['bc'])
+        J_bc_loss = w['data'] * np.array(loss['neumann'])
         force_gamma_addloss = w['force_true_gamma'] * np.array(loss['force_true_gamma'])
         tot_loss = np.array(loss['total'])
 
