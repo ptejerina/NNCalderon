@@ -5,6 +5,9 @@ import torch
 import torch.nn as nn
 import numpy as np
 
+import scipy.sparse as sp
+from scipy.sparse.linalg import spsolve
+
 #from fdm_forward_solver import FDMForwardSolver ##COMMENTED THIS TO SEE IF ISSUE IS RESOLVED
 from tqdm import trange
 import matplotlib.pyplot as plt
@@ -662,7 +665,7 @@ class Trainer:
         # --- NEW: build parametric gamma model ---
         # Example: a small set of 2D Fourier modes. You can change k_list freely.
         gb = config.get('gamma_basis', {})
-        k_list = gb.get('k_list', [(1,0), (0,1), (1,1)])  # example modes
+        k_list = gb.get('k_list', [(1,0),(0,1),(1,1),(2,0),(0,2),(2,2),(1,2),(2,1)])  # example modes  [(1,0), (0,1), (1,1)]
         Lx = gb.get('Lx', 1.0)
         Ly = gb.get('Ly', 1.0)
         include_cos = gb.get('include_cos', True)
@@ -670,7 +673,7 @@ class Trainer:
         basis_fns = make_fourier2d_basis(k_list, Lx=Lx, Ly=Ly, include_cos=include_cos, include_sin=include_sin)
 
         c_init = config.get('gamma_coeff_init', None)
-        positivity = config.get('gamma_positivity', 'softplus')  # 'none'|'softplus'|'sigmoid_bounds'
+        positivity = config.get('gamma_positivity', None)  # 'none'|'softplus'|'sigmoid_bounds'
         min_gamma = config.get('gamma_min', None)
         max_gamma = config.get('gamma_max', None)
 

@@ -665,7 +665,7 @@ class Trainer:
         # --- NEW: build parametric gamma model ---
         # Example: a small set of 2D Fourier modes. You can change k_list freely.
         gb = config.get('gamma_basis', {})
-        k_list = gb.get('k_list', [(1,0),(0,1),(1,1),(2,0),(0,2),(2,2),(1,2),(2,1)])  # example modes
+        k_list = gb.get('k_list', [(1,0), (0,1), (1,1)])  # example modes
         Lx = gb.get('Lx', 1.0)
         Ly = gb.get('Ly', 1.0)
         include_cos = gb.get('include_cos', True)
