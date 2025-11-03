@@ -816,36 +816,7 @@ class Trainer:
             for param_group in self.optimizer.param_groups:
                 print('Current LR is:', param_group['lr'])
 
-    # def plot_loss(self, save_fig=False):
-    #     loss = self.loss_history
-    #     w = self.config['loss_weights']
-
-    #     DE_loss = w['pde'] * np.array(loss['pde'])
-    #     f_bc_loss = w['dirichlet_bc'] * np.array(loss['bc'])
-    #     J_bc_loss = w['neumann_bc'] * np.array(loss['neumann'])
-    #     force_gamma_addloss = w.get('force_true_gamma', 0.0) * np.array(loss['force_true_gamma'])
-    #     tot_loss = np.array(loss['total'])
-
-    #     fig = plt.figure(figsize=(5,4))
-    #     plt.plot(tot_loss, label='Tot')
-    #     plt.plot(DE_loss, label='DE')
-    #     plt.plot(f_bc_loss, label=r'Dirichlet $f_k$')
-    #     plt.plot(J_bc_loss, label=r'Neumann $J_k$')
-    #     if w.get('force_true_gamma', 0.0) != 0.0:
-    #         plt.plot(force_gamma_addloss, label=r'Force $\gamma_{true}$')
-
-    #     plt.yscale('log'); plt.legend(loc=(1.01,0.35))
-    #     if save_fig:
-    #         fig.savefig(f'{self.path}/all_losses_epoch_{len(DE_loss)}.pdf')
-    #     plt.show()
-
-    #     print('Min DE loss', np.min(DE_loss))
-    #     print('Min f loss', np.min(f_bc_loss))
-    #     print('Min J loss', np.min(J_bc_loss))
-    
-    
-    ####ADDED THIS NOT TO PLOT LOG SCALE LOSS NOT SURE####
-    def plot_loss(self, save_fig=False, log_scale=False):  # default now: linear
+    def plot_loss(self, save_fig=False):
         loss = self.loss_history
         w = self.config['loss_weights']
 
@@ -860,26 +831,61 @@ class Trainer:
         plt.plot(DE_loss, label='PDE', color='C1', linewidth=1.6)
         plt.plot(f_bc_loss, label='Dirichlet $f_k$', color='C2', linewidth=1.6)
         plt.plot(J_bc_loss, label='Neumann $J_k$', color='C3', linewidth=1.6)
+
+        # fig = plt.figure(figsize=(5,4))
+        # plt.plot(tot_loss, label='Tot')
+        # plt.plot(DE_loss, label='DE')
+        # plt.plot(f_bc_loss, label=r'Dirichlet $f_k$')
+        # plt.plot(J_bc_loss, label=r'Neumann $J_k$')
         if w.get('force_true_gamma', 0.0) != 0.0:
             plt.plot(force_gamma_addloss, label=r'Force $\gamma_{true}$')
 
-        if log_scale:
-            plt.yscale('log')
-        plt.xlabel('Epochs')
-        plt.ylabel('Loss (linear)' if not log_scale else 'Loss (log scale)')
-        plt.legend(loc='upper right', frameon=True, framealpha=0.9)
-
-        # plt.legend(loc='best')
-        plt.tight_layout()
-
+        plt.yscale('log'); plt.legend(loc=(1.01,0.35))
         if save_fig:
-            suffix = "_linear" if not log_scale else "_log"
-            fig.savefig(f'{self.path}/all_losses_epoch_{len(DE_loss)}{suffix}.pdf')
+            fig.savefig(f'{self.path}/all_losses_epoch_{len(DE_loss)}.pdf')
         plt.show()
 
-        print('Min PDE loss', np.min(DE_loss))
-        print('Min Dirichlet loss', np.min(f_bc_loss))
-        print('Min Neumann loss', np.min(J_bc_loss))
+        print('Min DE loss', np.min(DE_loss))
+        print('Min f loss', np.min(f_bc_loss))
+        print('Min J loss', np.min(J_bc_loss))
+    
+    
+    # ####ADDED THIS NOT TO PLOT LOG SCALE LOSS NOT SURE####
+    # def plot_loss(self, save_fig=False, log_scale=False):  # default now: linear
+    #     loss = self.loss_history
+    #     w = self.config['loss_weights']
+
+    #     DE_loss = w['pde'] * np.array(loss['pde'])
+    #     f_bc_loss = w['dirichlet_bc'] * np.array(loss['bc'])
+    #     J_bc_loss = w['neumann_bc'] * np.array(loss['neumann'])
+    #     force_gamma_addloss = w.get('force_true_gamma', 0.0) * np.array(loss['force_true_gamma'])
+    #     tot_loss = np.array(loss['total'])
+
+    #     fig = plt.figure(figsize=(6,4))
+    #     plt.plot(tot_loss, label='Total', color='C0', linewidth=2.0)
+    #     plt.plot(DE_loss, label='PDE', color='C1', linewidth=1.6)
+    #     plt.plot(f_bc_loss, label='Dirichlet $f_k$', color='C2', linewidth=1.6)
+    #     plt.plot(J_bc_loss, label='Neumann $J_k$', color='C3', linewidth=1.6)
+    #     if w.get('force_true_gamma', 0.0) != 0.0:
+    #         plt.plot(force_gamma_addloss, label=r'Force $\gamma_{true}$')
+
+    #     if log_scale:
+    #         plt.yscale('log')
+    #     plt.xlabel('Epochs')
+    #     plt.ylabel('Loss (linear)' if not log_scale else 'Loss (log scale)')
+    #     plt.legend(loc='upper right', frameon=True, framealpha=0.9)
+
+    #     # plt.legend(loc='best')
+    #     plt.tight_layout()
+
+    #     if save_fig:
+    #         suffix = "_linear" if not log_scale else "_log"
+    #         fig.savefig(f'{self.path}/all_losses_epoch_{len(DE_loss)}{suffix}.pdf')
+    #     plt.show()
+
+    #     print('Min PDE loss', np.min(DE_loss))
+    #     print('Min Dirichlet loss', np.min(f_bc_loss))
+    #     print('Min Neumann loss', np.min(J_bc_loss))
 
 
     def plot_gamma_nn(self, N=128, save_fig=False):

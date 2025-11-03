@@ -665,7 +665,7 @@ class Trainer:
         # --- NEW: build parametric gamma model ---
         # Example: a small set of 2D Fourier modes. You can change k_list freely.
         gb = config.get('gamma_basis', {})
-        k_list = gb.get('k_list', [(1,0),(0,1),(1,1),(2,0),(0,2),(2,2),(1,2),(2,1)])  # example modes  [(1,0), (0,1), (1,1)]
+        k_list = gb.get('k_list', [(1,0),(0,1),(1,1),(2,0),(0,2),(2,2),(1,2),(2,1), (3,0),(0,3),(3,1),(1,3),(3,2),(2,3),(3,3),(4,0)])  # example modes  [(1,0), (0,1), (1,1)]
         Lx = gb.get('Lx', 1.0)
         Ly = gb.get('Ly', 1.0)
         include_cos = gb.get('include_cos', True)
@@ -1092,3 +1092,32 @@ class Trainer:
         with open(path_prefix + "_background.txt", "w") as f:
             f.write(f"{bg:.8g}\n")
         print("Saved learned params to:", path_prefix + "_c.npy/.txt and _background.txt")
+
+
+# ==#ADDED THIS to compare gamma_model and true gamma==
+    def gamma_error(self, N=128):
+        """
+        Compare gamma predicted by the network vs. true gamma on an N x N grid.
+        Returns dict with MAE, MSE, and relative L2.
+        """
+        if self.synthetic_data is None:
+            raise RuntimeError("gamma_error() needs synthetic_data with gamma_true inside.")
+
+        # Build grid on device
+        x = torch.linspace(0, 1, N, device=self.device)
+        y = torch.linspace(0, 1, N, device=self.device)
+        xx, yy = torch.meshgrid(x, y, indexing='ij')
+        xy = torch.stack([xx.reshape(-1), yy.reshape(-1)], dim=1)
+
+        with torch.no_grad():
+            gamma_pred = self.gamma_model(xy).reshape(-1)         # [N*N]
+            gamma_true = self.pinn_manager.gamma_true(xy).reshape(-1)
+
+        diff = (gamma_pred - gamma_true).cpu().numpy()
+        gt   = gamma_true.cpu().numpy()
+
+        mae = float(np.mean(np.abs(diff)))
+        mse = float(np.mean(diff**2))
+        rel_l2 = float(np.linalg.norm(diff) / (np.linalg.norm(gt) + 1e-12))
+
+        return {"mae": mae, "mse": mse, "rel_l2": rel_l2}

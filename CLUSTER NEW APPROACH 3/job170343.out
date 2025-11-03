@@ -1,0 +1,7 @@
+Saving directory exists: /home/akalout/NEWAPPROACH3/NEW_ALI_TRIAL_5/train_runs/fourier_linear_L1
+Using device: cuda
+Model successfully loaded
+Min PDE loss 0.00016479589976370335
+Min Dirichlet loss 0.003109450626652688
+Min Neumann loss 0.003256939584389329
+Saved loss plot to: /home/akalout/NEWAPPROACH3/NEW_ALI_TRIAL_5/train_runs/fourier_linear_L1/all_losses_epoch_90000_log.pdf
