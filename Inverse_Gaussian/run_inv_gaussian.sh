@@ -7,8 +7,8 @@
 #SBATCH --mem=200G
 #SBATCH --time=5-00:00:00
 #SBATCH --partition=unlimited
-#SBATCH --output=/home/akalout/NEWAPPROACH5/results/job%j.out
-#SBATCH --error=/home/akalout/NEWAPPROACH5/results/job%j.err
+#SBATCH --output=/home/akalout/INV_gaussian/results/job%j.out
+#SBATCH --error=/home/akalout/INV_gaussian/results/job%j.err
 #SBATCH --mail-type=ALL
 #SBATCH --mail-user=alikalout91@gmail.com
 
@@ -28,4 +28,4 @@ cd "$SLURM_SUBMIT_DIR"
 # 4) make local imports work (guard PYTHONPATH)
 export PYTHONPATH="${PYTHONPATH:-}:$SLURM_SUBMIT_DIR"
 
-python3 run_new_approach_3.py
+python3 run_inv_gaussian_60trig_BC.py
