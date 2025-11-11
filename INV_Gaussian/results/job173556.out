@@ -1,0 +1,292 @@
+/home/akalout/INV_Gaussian/data_inverted_gaussian/dtn_data_inverted_gaussian_well.npz
+grid size 64
+number of BC functions 60
+Saving directory created: /home/akalout/INV_Gaussian/data_inverted_gaussian/train_runs_Relu
+Using device: cuda
+Starting training for case: inverted_gaussian_well, noise: 0pct
+forward pass through gamma NN !
+Epoch 1000/1000 | Total Loss: 2.96e+02 | PDE: 4.81e+01 | Data: 2.48e+01
+Training finished. Total time: 493.47s
+Model succesfully saved
+Min DE loss 0.016181401908397675
+Min f loss 4.407622516155243
+Min J loss 242.99352645874023
+Mean Relative error: 46.839874 %
+(128, 128)
+Saved plot 0
+Saved plot 10
+Saved plot 20
+Saved plot 30
+Saved plot 40
+Saved plot 49
+Saved plot 0
+Saved plot 10
+Saved plot 20
+Saved plot 30
+Saved plot 40
+Saved plot 49
+Saved plot 0
+Saved plot 10
+Saved plot 20
+Saved plot 49
+Starting training for case: inverted_gaussian_well, noise: 0pct
+Epoch 1000/1000 | Total Loss: 2.93e+02 | PDE: 7.23e+01 | Data: 2.21e+01
+Epoch 2000/1000 | Total Loss: 2.57e+02 | PDE: 7.90e+01 | Data: 1.78e+01
+Epoch 3000/1000 | Total Loss: 2.21e+02 | PDE: 8.89e+01 | Data: 1.32e+01
+Epoch 4000/1000 | Total Loss: 1.71e+02 | PDE: 9.82e+01 | Data: 7.26e+00
+Epoch 5000/1000 | Total Loss: 1.02e+02 | PDE: 5.32e+01 | Data: 4.90e+00
+Epoch 6000/1000 | Total Loss: 8.08e+01 | PDE: 5.08e+01 | Data: 3.00e+00
+Epoch 7000/1000 | Total Loss: 6.14e+01 | PDE: 4.28e+01 | Data: 1.87e+00
+Epoch 8000/1000 | Total Loss: 4.63e+01 | PDE: 3.25e+01 | Data: 1.38e+00
+Epoch 9000/1000 | Total Loss: 3.85e+01 | PDE: 2.83e+01 | Data: 1.02e+00
+Epoch 10000/1000 | Total Loss: 2.71e+01 | PDE: 1.99e+01 | Data: 7.27e-01
+Training finished. Total time: 4953.15s
+Model succesfully saved
+Min DE loss 0.016181401908397675
+Min f loss 1.2589411437511444
+Min J loss 5.176406502723694
+Mean Relative error: 26.754654 %
+(128, 128)
+Starting training for case: inverted_gaussian_well, noise: 0pct
+Epoch 1000/1000 | Total Loss: 2.10e+01 | PDE: 1.56e+01 | Data: 5.38e-01
+Epoch 2000/1000 | Total Loss: 1.77e+01 | PDE: 1.34e+01 | Data: 4.31e-01
+Epoch 3000/1000 | Total Loss: 1.40e+01 | PDE: 1.08e+01 | Data: 3.23e-01
+Epoch 4000/1000 | Total Loss: 1.07e+01 | PDE: 7.63e+00 | Data: 3.06e-01
+Epoch 5000/1000 | Total Loss: 9.94e+00 | PDE: 7.76e+00 | Data: 2.18e-01
+Epoch 6000/1000 | Total Loss: 8.22e+00 | PDE: 6.58e+00 | Data: 1.64e-01
+Epoch 7000/1000 | Total Loss: 5.49e+00 | PDE: 4.24e+00 | Data: 1.25e-01
+Epoch 8000/1000 | Total Loss: 5.74e+00 | PDE: 4.76e+00 | Data: 9.77e-02
+Epoch 9000/1000 | Total Loss: 5.17e+00 | PDE: 4.23e+00 | Data: 9.36e-02
+Epoch 10000/1000 | Total Loss: 3.98e+00 | PDE: 3.32e+00 | Data: 6.62e-02
+Training finished. Total time: 4983.51s
+Model succesfully saved
+Min DE loss 0.016181401908397675
+Min f loss 0.3393068164587021
+Min J loss 0.2380174957215786
+Mean Relative error: 16.450485 %
+(128, 128)
+Saved plot 0
+Saved plot 10
+Saved plot 20
+Saved plot 30
+Saved plot 40
+Saved plot 49
+Saved plot 0
+Saved plot 10
+Saved plot 20
+Saved plot 30
+Saved plot 40
+Saved plot 49
+Saved plot 0
+Saved plot 10
+Saved plot 20
+Saved plot 49
+Starting training for case: inverted_gaussian_well, noise: 0pct
+Epoch 1000/1000 | Total Loss: 3.64e+00 | PDE: 2.99e+00 | Data: 6.50e-02
+Epoch 2000/1000 | Total Loss: 3.27e+00 | PDE: 2.70e+00 | Data: 5.62e-02
+Epoch 3000/1000 | Total Loss: 3.08e+00 | PDE: 2.63e+00 | Data: 4.49e-02
+Epoch 4000/1000 | Total Loss: 2.63e+00 | PDE: 2.23e+00 | Data: 3.97e-02
+Epoch 5000/1000 | Total Loss: 2.46e+00 | PDE: 2.12e+00 | Data: 3.36e-02
+Epoch 6000/1000 | Total Loss: 2.11e+00 | PDE: 1.90e+00 | Data: 2.15e-02
+Epoch 7000/1000 | Total Loss: 1.52e+00 | PDE: 1.35e+00 | Data: 1.76e-02
+Epoch 8000/1000 | Total Loss: 2.04e+00 | PDE: 1.87e+00 | Data: 1.74e-02
+Epoch 9000/1000 | Total Loss: 1.36e+00 | PDE: 1.23e+00 | Data: 1.29e-02
+Epoch 10000/1000 | Total Loss: 1.05e+00 | PDE: 9.24e-01 | Data: 1.26e-02
+Training finished. Total time: 4990.31s
+Model succesfully saved
+Min DE loss 0.016181401908397675
+Min f loss 0.040746890008449554
+Min J loss 0.04581284709274769
+Mean Relative error: 12.650392 %
+(128, 128)
+Starting training for case: inverted_gaussian_well, noise: 0pct
+Epoch 1000/1000 | Total Loss: 1.76e+00 | PDE: 1.64e+00 | Data: 1.21e-02
+Epoch 2000/1000 | Total Loss: 1.12e+00 | PDE: 1.02e+00 | Data: 9.92e-03
+Epoch 3000/1000 | Total Loss: 1.12e+00 | PDE: 1.04e+00 | Data: 8.30e-03
+Epoch 4000/1000 | Total Loss: 1.08e+00 | PDE: 9.99e-01 | Data: 7.68e-03
+Epoch 5000/1000 | Total Loss: 1.17e+00 | PDE: 1.09e+00 | Data: 7.19e-03
+Epoch 6000/1000 | Total Loss: 8.07e-01 | PDE: 7.25e-01 | Data: 8.22e-03
+Epoch 7000/1000 | Total Loss: 7.80e-01 | PDE: 7.24e-01 | Data: 5.58e-03
+Epoch 8000/1000 | Total Loss: 8.21e-01 | PDE: 7.59e-01 | Data: 6.24e-03
+Epoch 9000/1000 | Total Loss: 6.11e-01 | PDE: 5.59e-01 | Data: 5.26e-03
+Epoch 10000/1000 | Total Loss: 6.96e-01 | PDE: 6.44e-01 | Data: 5.19e-03
+Training finished. Total time: 4977.77s
+Model succesfully saved
+Min DE loss 0.016181401908397675
+Min f loss 0.014329126570373774
+Min J loss 0.018788627348840237
+Mean Relative error: 10.235103 %
+(128, 128)
+Saved plot 0
+Saved plot 10
+Saved plot 20
+Saved plot 30
+Saved plot 40
+Saved plot 49
+Saved plot 0
+Saved plot 10
+Saved plot 20
+Saved plot 30
+Saved plot 40
+Saved plot 49
+Saved plot 0
+Saved plot 10
+Saved plot 20
+Saved plot 49
+Starting training for case: inverted_gaussian_well, noise: 0pct
+Epoch 1000/1000 | Total Loss: 4.91e-01 | PDE: 4.45e-01 | Data: 4.60e-03
+Epoch 2000/1000 | Total Loss: 6.05e-01 | PDE: 5.60e-01 | Data: 4.55e-03
+Epoch 3000/1000 | Total Loss: 4.52e-01 | PDE: 4.16e-01 | Data: 3.62e-03
+Epoch 4000/1000 | Total Loss: 5.84e-01 | PDE: 5.42e-01 | Data: 4.16e-03
+Epoch 5000/1000 | Total Loss: 3.54e-01 | PDE: 3.22e-01 | Data: 3.19e-03
+Epoch 6000/1000 | Total Loss: 5.22e-01 | PDE: 4.86e-01 | Data: 3.64e-03
+Epoch 7000/1000 | Total Loss: 4.68e-01 | PDE: 4.38e-01 | Data: 2.94e-03
+Epoch 8000/1000 | Total Loss: 3.94e-01 | PDE: 3.64e-01 | Data: 2.93e-03
+Epoch 9000/1000 | Total Loss: 4.05e-01 | PDE: 3.79e-01 | Data: 2.63e-03
+Epoch 10000/1000 | Total Loss: 4.69e-01 | PDE: 4.40e-01 | Data: 2.96e-03
+Training finished. Total time: 5021.13s
+Model succesfully saved
+Min DE loss 0.016181401908397675
+Min f loss 0.00758289301302284
+Min J loss 0.010724059538915753
+Mean Relative error: 8.943317 %
+(128, 128)
+Starting training for case: inverted_gaussian_well, noise: 0pct
+Epoch 1000/1000 | Total Loss: 3.20e-01 | PDE: 2.90e-01 | Data: 3.00e-03
+Epoch 2000/1000 | Total Loss: 3.63e-01 | PDE: 3.31e-01 | Data: 3.17e-03
+Epoch 3000/1000 | Total Loss: 3.45e-01 | PDE: 3.16e-01 | Data: 2.85e-03
+Epoch 4000/1000 | Total Loss: 2.70e-01 | PDE: 2.46e-01 | Data: 2.36e-03
+Epoch 5000/1000 | Total Loss: 2.99e-01 | PDE: 2.78e-01 | Data: 2.08e-03
+Epoch 6000/1000 | Total Loss: 2.25e-01 | PDE: 2.08e-01 | Data: 1.77e-03
+Epoch 7000/1000 | Total Loss: 2.32e-01 | PDE: 2.17e-01 | Data: 1.58e-03
+Epoch 8000/1000 | Total Loss: 3.43e-01 | PDE: 3.17e-01 | Data: 2.53e-03
+Epoch 9000/1000 | Total Loss: 1.74e-01 | PDE: 1.59e-01 | Data: 1.44e-03
+Epoch 10000/1000 | Total Loss: 2.31e-01 | PDE: 2.15e-01 | Data: 1.58e-03
+Training finished. Total time: 5004.93s
+Model succesfully saved
+Min DE loss 0.016181401908397675
+Min f loss 0.004596171202138066
+Min J loss 0.006229960708878934
+Mean Relative error: 7.980442 %
+(128, 128)
+Saved plot 0
+Saved plot 10
+Saved plot 20
+Saved plot 30
+Saved plot 40
+Saved plot 49
+Saved plot 0
+Saved plot 10
+Saved plot 20
+Saved plot 30
+Saved plot 40
+Saved plot 49
+Saved plot 0
+Saved plot 10
+Saved plot 20
+Saved plot 49
+Starting training for case: inverted_gaussian_well, noise: 0pct
+Epoch 1000/1000 | Total Loss: 2.54e-01 | PDE: 2.36e-01 | Data: 1.79e-03
+Epoch 2000/1000 | Total Loss: 2.06e-01 | PDE: 1.87e-01 | Data: 1.95e-03
+Epoch 3000/1000 | Total Loss: 1.72e-01 | PDE: 1.58e-01 | Data: 1.33e-03
+Epoch 4000/1000 | Total Loss: 1.69e-01 | PDE: 1.55e-01 | Data: 1.33e-03
+Epoch 5000/1000 | Total Loss: 1.62e-01 | PDE: 1.46e-01 | Data: 1.59e-03
+Epoch 6000/1000 | Total Loss: 2.12e-01 | PDE: 2.00e-01 | Data: 1.16e-03
+Epoch 7000/1000 | Total Loss: 2.39e-01 | PDE: 2.28e-01 | Data: 1.12e-03
+Epoch 8000/1000 | Total Loss: 1.47e-01 | PDE: 1.32e-01 | Data: 1.50e-03
+Epoch 9000/1000 | Total Loss: 1.32e-01 | PDE: 1.20e-01 | Data: 1.25e-03
+Epoch 10000/1000 | Total Loss: 1.55e-01 | PDE: 1.45e-01 | Data: 1.01e-03
+Training finished. Total time: 5014.21s
+Model succesfully saved
+Min DE loss 0.016181401908397675
+Min f loss 0.0035692480742000043
+Min J loss 0.004080233338754624
+Mean Relative error: 7.3118553 %
+(128, 128)
+Starting training for case: inverted_gaussian_well, noise: 0pct
+Epoch 1000/1000 | Total Loss: 1.14e-01 | PDE: 1.03e-01 | Data: 1.13e-03
+Epoch 2000/1000 | Total Loss: 1.36e-01 | PDE: 1.21e-01 | Data: 1.48e-03
+Epoch 3000/1000 | Total Loss: 1.15e-01 | PDE: 1.05e-01 | Data: 1.07e-03
+Epoch 4000/1000 | Total Loss: 1.12e-01 | PDE: 1.03e-01 | Data: 9.11e-04
+Epoch 5000/1000 | Total Loss: 1.03e-01 | PDE: 9.27e-02 | Data: 1.04e-03
+Epoch 6000/1000 | Total Loss: 9.97e-02 | PDE: 9.17e-02 | Data: 7.96e-04
+Epoch 7000/1000 | Total Loss: 8.43e-02 | PDE: 7.61e-02 | Data: 8.16e-04
+Epoch 8000/1000 | Total Loss: 7.91e-02 | PDE: 6.98e-02 | Data: 9.30e-04
+Epoch 9000/1000 | Total Loss: 8.60e-02 | PDE: 7.81e-02 | Data: 7.85e-04
+Epoch 10000/1000 | Total Loss: 5.44e-02 | PDE: 4.72e-02 | Data: 7.19e-04
+Training finished. Total time: 4994.87s
+Model succesfully saved
+Min DE loss 0.016181401908397675
+Min f loss 0.0030459705158136785
+Min J loss 0.0027484644670039415
+Mean Relative error: 6.904214 %
+(128, 128)
+Saved plot 0
+Saved plot 10
+Saved plot 20
+Saved plot 30
+Saved plot 40
+Saved plot 49
+Saved plot 0
+Saved plot 10
+Saved plot 20
+Saved plot 30
+Saved plot 40
+Saved plot 49
+Saved plot 0
+Saved plot 10
+Saved plot 20
+Saved plot 49
+Starting training for case: inverted_gaussian_well, noise: 0pct
+Epoch 1000/1000 | Total Loss: 8.70e-02 | PDE: 7.82e-02 | Data: 8.72e-04
+Epoch 2000/1000 | Total Loss: 9.87e-02 | PDE: 8.93e-02 | Data: 9.37e-04
+Epoch 3000/1000 | Total Loss: 8.76e-02 | PDE: 7.92e-02 | Data: 8.40e-04
+Epoch 4000/1000 | Total Loss: 5.77e-02 | PDE: 4.84e-02 | Data: 9.36e-04
+Epoch 5000/1000 | Total Loss: 6.05e-02 | PDE: 5.43e-02 | Data: 6.28e-04
+Epoch 6000/1000 | Total Loss: 6.87e-02 | PDE: 6.05e-02 | Data: 8.15e-04
+Epoch 7000/1000 | Total Loss: 6.29e-02 | PDE: 5.58e-02 | Data: 7.06e-04
+Epoch 8000/1000 | Total Loss: 6.76e-02 | PDE: 6.09e-02 | Data: 6.71e-04
+Epoch 9000/1000 | Total Loss: 5.10e-02 | PDE: 4.44e-02 | Data: 6.61e-04
+Epoch 10000/1000 | Total Loss: 5.70e-02 | PDE: 4.90e-02 | Data: 7.98e-04
+Training finished. Total time: 5028.25s
+Model succesfully saved
+Min DE loss 0.016181401908397675
+Min f loss 0.0026665948098525405
+Min J loss 0.0019799986330326647
+Mean Relative error: 6.6254125 %
+(128, 128)
+Starting training for case: inverted_gaussian_well, noise: 0pct
+Epoch 1000/1000 | Total Loss: 5.02e-02 | PDE: 4.28e-02 | Data: 7.39e-04
+Epoch 2000/1000 | Total Loss: 3.87e-02 | PDE: 3.25e-02 | Data: 6.16e-04
+Epoch 3000/1000 | Total Loss: 5.48e-02 | PDE: 4.80e-02 | Data: 6.80e-04
+Epoch 4000/1000 | Total Loss: 6.60e-02 | PDE: 6.03e-02 | Data: 5.67e-04
+Epoch 5000/1000 | Total Loss: 5.28e-02 | PDE: 4.68e-02 | Data: 6.00e-04
+Epoch 6000/1000 | Total Loss: 3.76e-02 | PDE: 3.16e-02 | Data: 5.98e-04
+Epoch 7000/1000 | Total Loss: 4.35e-02 | PDE: 3.66e-02 | Data: 6.81e-04
+Epoch 8000/1000 | Total Loss: 4.67e-02 | PDE: 4.08e-02 | Data: 5.89e-04
+Epoch 9000/1000 | Total Loss: 3.61e-02 | PDE: 3.02e-02 | Data: 5.90e-04
+Epoch 10000/1000 | Total Loss: 3.50e-02 | PDE: 2.96e-02 | Data: 5.42e-04
+Training finished. Total time: 5031.76s
+Model succesfully saved
+Min DE loss 0.016181401908397675
+Min f loss 0.0025355155230499804
+Min J loss 0.0016063787916209549
+Mean Relative error: 6.4271793 %
+(128, 128)
+Saved plot 0
+Saved plot 10
+Saved plot 20
+Saved plot 30
+Saved plot 40
+Saved plot 49
+Saved plot 0
+Saved plot 10
+Saved plot 20
+Saved plot 30
+Saved plot 40
+Saved plot 49
+Saved plot 0
+Saved plot 10
+Saved plot 20
+Saved plot 49
+13.983124089444445 hours
