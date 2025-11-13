@@ -24,7 +24,7 @@ for case in CASES:
 
         current_dir = f'{os.getcwd()}'
         
-        data_filepath = os.path.join(f"{current_dir}", "data_inverted_gaussian_even_sampling", "dtn_data_" + case + ".npz")
+        data_filepath = os.path.join(f"{current_dir}", "data_inverted_gaussian_even_sampling_wider", "dtn_data_" + case + ".npz")
         print(data_filepath)
 
 
