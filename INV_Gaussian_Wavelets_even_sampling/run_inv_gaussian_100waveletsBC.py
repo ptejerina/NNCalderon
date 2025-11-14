@@ -24,7 +24,7 @@ for case in CASES:
 
         current_dir = f'{os.getcwd()}'
         
-        data_filepath = os.path.join(f"{current_dir}", "data_inverted_gaussian_wavelets", "dtn_data_random" + case + ".npz")
+        data_filepath = os.path.join(f"{current_dir}", "data_inverted_gaussian_wavelets", "dtn_data_random_" + case + ".npz")
         print(data_filepath)
 
 
