@@ -42,7 +42,7 @@ print('number of BC functions', dataset.k_indices.shape[0])
 
 CONFIG = {
     'epochs': 1000,
-    'learning_rate': 1e-3,
+    'learning_rate': 1e-4,
     'lr_decay_gamma': 0.95,
     'lr_decay_step': 10000,
     'batch_size_pde': 4096,
