@@ -841,8 +841,9 @@ class Trainer:
             for key in self.loss_history:
                 self.loss_history[key].append(loss_dict[key])
 
-            if epoch % self.config['lr_decay_step'] == 0:
+            if self.scheduler is not None and epoch % self.config['lr_decay_step'] == 0: #when i set traier.self=None in run.py no need to comment out this line
                 self.scheduler.step()
+
 
             if epoch % 1000 == 0:
                 log_str = (
