@@ -62,15 +62,15 @@ trainer = Trainer(CONFIG, num_bcs=dataset.num_bcs, synthetic_data=data_filepath,
                   gamma_activ = nn.ReLU(), gamma_actv_last_layer = True)
 
 
-loop_index = 202000
+loop_index = 686000
 
 trainer.load_model(path=f'{saving_path}/NN_epochs_{loop_index}')
 
-trainer.update_optimizer(lr=2.5e-5)
+# trainer.update_optimizer(lr=5e-6)
 
 ### Train for the selected amount of epochs  (defaults to CONFIG) ###
 
-train_epochs = 10_000
+train_epochs = 20_000
 check_epochs = 1_000
 reps = 11
 
@@ -83,7 +83,10 @@ for i in range(reps):
     if i==0:
         trainer.train(dataset, case, noise_str, train_epochs=check_epochs, disable_progress_bar=False)
 
-    else:
+    else:      
+        if i==1:   
+            trainer.update_optimizer(lr=2.5e-6)
+   
         trainer.train(dataset, case, noise_str, train_epochs=train_epochs, disable_progress_bar=True)
 
 
