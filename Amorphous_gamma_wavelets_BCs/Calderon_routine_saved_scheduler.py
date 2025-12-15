@@ -120,7 +120,7 @@ class ConductivityNetwork(nn.Module):
             print('forward pass through gamma NN !')
             self.FLAG=True
             
-        return self.min_gamma + (self.max_gamma - self.min_gamma) * raw_output
+        return raw_output
 
 
 class PotentialNetwork(nn.Module):
