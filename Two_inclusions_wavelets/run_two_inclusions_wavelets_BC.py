@@ -1,8 +1,7 @@
 import time
 t = time.process_time()
 
-from Calderon_routine_saved_scheduler import *
-
+from Calderon_routine_rescaled import *
 
 ###### Choose the cases for the conductivity gamma to be solved, and the folder with the desidered BCs #######
 
@@ -30,7 +29,7 @@ for case in CASES:
 
 
 ### Choose saving path: e.g. same path where data is ###
-saving_path = os.path.dirname(data_filepath) + '/train_runs_Silu'
+saving_path = os.path.dirname(data_filepath) + '/train_runs_Silu_uniform_rescaled_5.0'
 
 
 dataset = CalderonDataset(data_filepath, noise_val)
@@ -56,7 +55,7 @@ CONFIG = {
     'loss_weights': {'pde': 1.0, 'dirichlet_bc': 10.0, 'neumann_bc': 10.0, 'force_true_gamma': 0.0},
     'density_factor': 10.0,
     'center_bounds': (0.25, 0.75),
-    'sampling_method': 'square_dense_center',
+    'sampling_method': 'uniform',
 
 }
 
