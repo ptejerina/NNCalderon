@@ -27,8 +27,8 @@ for case in CASES:
 # ----- OLD and NEW saving paths ----- #####need two paths to load from old and save in new
 base_dir = os.path.dirname(data_filepath)
 
-old_saving_path = os.path.join(base_dir, "train_runs_Silu")
-new_saving_path = os.path.join(base_dir, "train_runs_cont'd")
+old_saving_path = os.path.join(base_dir, "train_runs_Silu_rescaled_better")
+new_saving_path = os.path.join(base_dir, "train_runs_cont'd_rescaled_better")
 
 print("Old saving path (for loading):", old_saving_path)
 print("New saving path (for resumed runs):", new_saving_path)

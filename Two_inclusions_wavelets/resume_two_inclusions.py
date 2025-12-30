@@ -27,8 +27,8 @@ for case in CASES:
 # ----- OLD and NEW saving paths ----- #####need two paths to load from old and save in new
 base_dir = os.path.dirname(data_filepath)
 
-old_saving_path = os.path.join(base_dir, "train_runs_Silu")
-new_saving_path = os.path.join(base_dir, "train_runs_new_cont'd")
+old_saving_path = os.path.join(base_dir, "train_runs_Silu_uniform_rescaled_5.0")
+new_saving_path = os.path.join(base_dir, "train_runs_new_cont'd_rescaled_5.0")
 
 print("Old saving path (for loading):", old_saving_path)
 print("New saving path (for resumed runs):", new_saving_path)
@@ -75,7 +75,7 @@ trainer = Trainer(
 )
 
 # === 2) Load checkpoint NN_epochs_141000 from old saving path ===
-checkpoint_path = f"{old_saving_path}/NN_epochs_351000"
+checkpoint_path = f"{old_saving_path}/NN_epochs_341000"
 print("Loading checkpoint:", checkpoint_path)
 
 trainer.load_model(checkpoint_path)

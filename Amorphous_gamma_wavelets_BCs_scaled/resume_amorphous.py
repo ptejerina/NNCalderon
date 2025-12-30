@@ -75,7 +75,7 @@ trainer = Trainer(
 )
 
 # === 2) Load checkpoint NN_epochs_141000 from old saving path ===
-checkpoint_path = f"{old_saving_path}/NN_epochs_351000"
+checkpoint_path = f"{old_saving_path}/NN_epochs_166000"
 print("Loading checkpoint:", checkpoint_path)
 
 trainer.load_model(checkpoint_path)
