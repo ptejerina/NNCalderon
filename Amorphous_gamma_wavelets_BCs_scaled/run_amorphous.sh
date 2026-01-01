@@ -7,8 +7,8 @@
 #SBATCH --mem=200G
 #SBATCH --time=5-00:00:00
 #SBATCH --partition=unlimited
-#SBATCH --output=/home/akalout/Amorphous_gamma_wavelets_BCs_scaled/results/job%j.out
-#SBATCH --error=/home/akalout/Amorphous_gamma_wavelets_BCs_scaled/results/job%j.err
+#SBATCH --output=/home/akalout/Amorphous_gamma_wavelets_BCs/results/job%j.out
+#SBATCH --error=/home/akalout/Amorphous_gamma_wavelets_BCs/results/job%j.err
 #SBATCH --mail-type=ALL
 #SBATCH --mail-user=alikalout91@gmail.com
 

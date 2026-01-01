@@ -19,7 +19,7 @@ for case in CASES:
         current_dir = f'{os.getcwd()}'
         data_filepath = os.path.join(
             current_dir,
-            "data_amorphous_BC_wavelets",
+            "data_amorphous_BC_wavelets_2",
             "dtn_data_" + case + ".npz"
         )
         print("Data path:", data_filepath)
