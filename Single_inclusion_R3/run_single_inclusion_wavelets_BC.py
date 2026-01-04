@@ -56,7 +56,7 @@ CONFIG = {
     'loss_weights': {'pde': 1.0, 'dirichlet_bc': 10.0, 'neumann_bc': 10.0, 'force_true_gamma': 0.0},
     'density_factor': 10.0,
     'center_bounds': (0.25, 0.75),
-    'sampling_method': 'unifrom',
+    'sampling_method': 'uniform',
 
 }
 
