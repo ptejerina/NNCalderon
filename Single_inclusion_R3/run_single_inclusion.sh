@@ -7,8 +7,8 @@
 #SBATCH --mem=200G
 #SBATCH --time=5-00:00:00
 #SBATCH --partition=unlimited
-#SBATCH --output=/home/akalout/Single_inclusion_R2/results/job%j.out
-#SBATCH --error=/home/akalout/Single_inclusion_R2/results/job%j.err
+#SBATCH --output=/home/akalout/Single_inclusion_R3/results/job%j.out
+#SBATCH --error=/home/akalout/Single_inclusion_R3/results/job%j.err
 #SBATCH --mail-type=ALL
 #SBATCH --mail-user=alikalout91@gmail.com
 
