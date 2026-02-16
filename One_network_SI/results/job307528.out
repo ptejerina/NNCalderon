@@ -1,0 +1,156 @@
+
+============================================================
+RUNNING EXPERIMENT: CASE = single_inclusion | NOISE = 0pct
+Data: /home/akalout/One_network_SI/data_single_inclusion_R3_BC_wavelets_orig/dtn_data_single_inclusion.npz
+============================================================
+
+grid size: 64
+number of BC functions (K): 140
+boundary coords shape: (252, 2)
+Boundary points = 252 -> implies grid_N=64 (since 4N-4=252). Dense solve OK.
+Selected linear solver: dense (pref=auto)
+Using device: cuda
+Saving to: /home/akalout/One_network_SI/data_single_inclusion_R3_BC_wavelets_orig/train_runs_DtN_new
+Max |boundary_coords(data) - boundary_coords(solver)| = 5.960e-08
+✅ Boundary ordering already matches solver.
+
+[rep 1/30] sanity training for 50 epochs
+[dense] interior unknowns=3844, dense A ~ 56.4 MB (float32)
+Training 50 epochs | batch_k=4 | solver=dense
+Epoch 10/50 | loss=1.382e-01 | data=1.382e-01 | reg=0.000e+00
+Epoch 20/50 | loss=2.164e-02 | data=2.164e-02 | reg=0.000e+00
+Epoch 30/50 | loss=4.170e-03 | data=4.170e-03 | reg=0.000e+00
+Epoch 40/50 | loss=6.931e-03 | data=6.931e-03 | reg=0.000e+00
+Epoch 50/50 | loss=2.622e-03 | data=2.622e-03 | reg=0.000e+00
+Done. Time(s): 38.6
+Saved: /home/akalout/One_network_SI/data_single_inclusion_R3_BC_wavelets_orig/train_runs_DtN_new/gammaNN_DtN_steps_1750.pth
+
+[rep 2/30] training for 1000 epochs
+[dense] interior unknowns=3844, dense A ~ 56.4 MB (float32)
+Training 1000 epochs | batch_k=4 | solver=dense
+Epoch 10/1000 | loss=2.221e-03 | data=2.221e-03 | reg=0.000e+00
+Epoch 20/1000 | loss=3.850e-03 | data=3.850e-03 | reg=0.000e+00
+Epoch 30/1000 | loss=1.638e-03 | data=1.638e-03 | reg=0.000e+00
+Epoch 40/1000 | loss=1.596e-03 | data=1.596e-03 | reg=0.000e+00
+Epoch 50/1000 | loss=1.086e-03 | data=1.086e-03 | reg=0.000e+00
+Epoch 60/1000 | loss=7.031e-04 | data=7.031e-04 | reg=0.000e+00
+Epoch 70/1000 | loss=8.407e-04 | data=8.407e-04 | reg=0.000e+00
+Epoch 80/1000 | loss=4.081e-04 | data=4.081e-04 | reg=0.000e+00
+Epoch 90/1000 | loss=1.269e-03 | data=1.269e-03 | reg=0.000e+00
+Epoch 100/1000 | loss=6.932e-04 | data=6.932e-04 | reg=0.000e+00
+Epoch 110/1000 | loss=3.407e-04 | data=3.407e-04 | reg=0.000e+00
+Epoch 120/1000 | loss=3.291e-04 | data=3.291e-04 | reg=0.000e+00
+Epoch 130/1000 | loss=1.571e-03 | data=1.571e-03 | reg=0.000e+00
+Epoch 140/1000 | loss=2.093e-03 | data=2.093e-03 | reg=0.000e+00
+Epoch 150/1000 | loss=3.256e-04 | data=3.256e-04 | reg=0.000e+00
+Epoch 160/1000 | loss=1.245e-04 | data=1.245e-04 | reg=0.000e+00
+Epoch 170/1000 | loss=4.134e-04 | data=4.134e-04 | reg=0.000e+00
+Epoch 180/1000 | loss=1.286e-03 | data=1.286e-03 | reg=0.000e+00
+Epoch 190/1000 | loss=1.471e-04 | data=1.471e-04 | reg=0.000e+00
+Epoch 200/1000 | loss=2.568e-03 | data=2.568e-03 | reg=0.000e+00
+Epoch 210/1000 | loss=3.908e-04 | data=3.908e-04 | reg=0.000e+00
+Epoch 220/1000 | loss=1.924e-04 | data=1.924e-04 | reg=0.000e+00
+Epoch 230/1000 | loss=3.874e-03 | data=3.874e-03 | reg=0.000e+00
+Epoch 240/1000 | loss=2.253e-03 | data=2.253e-03 | reg=0.000e+00
+Epoch 250/1000 | loss=1.848e-04 | data=1.848e-04 | reg=0.000e+00
+Epoch 260/1000 | loss=1.559e-03 | data=1.559e-03 | reg=0.000e+00
+Epoch 270/1000 | loss=6.717e-04 | data=6.717e-04 | reg=0.000e+00
+Epoch 280/1000 | loss=3.591e-04 | data=3.591e-04 | reg=0.000e+00
+Epoch 290/1000 | loss=7.213e-04 | data=7.213e-04 | reg=0.000e+00
+Epoch 300/1000 | loss=8.666e-04 | data=8.666e-04 | reg=0.000e+00
+Epoch 310/1000 | loss=1.515e-04 | data=1.515e-04 | reg=0.000e+00
+Epoch 320/1000 | loss=5.830e-04 | data=5.830e-04 | reg=0.000e+00
+Epoch 330/1000 | loss=9.717e-04 | data=9.717e-04 | reg=0.000e+00
+Epoch 340/1000 | loss=2.587e-04 | data=2.587e-04 | reg=0.000e+00
+Epoch 350/1000 | loss=1.533e-03 | data=1.533e-03 | reg=0.000e+00
+Epoch 360/1000 | loss=1.953e-04 | data=1.953e-04 | reg=0.000e+00
+Epoch 370/1000 | loss=9.381e-04 | data=9.381e-04 | reg=0.000e+00
+Epoch 380/1000 | loss=6.542e-04 | data=6.542e-04 | reg=0.000e+00
+Epoch 390/1000 | loss=1.236e-03 | data=1.236e-03 | reg=0.000e+00
+Epoch 400/1000 | loss=1.601e-04 | data=1.601e-04 | reg=0.000e+00
+Epoch 410/1000 | loss=1.187e-04 | data=1.187e-04 | reg=0.000e+00
+Epoch 420/1000 | loss=2.156e-04 | data=2.156e-04 | reg=0.000e+00
+Epoch 430/1000 | loss=1.969e-04 | data=1.969e-04 | reg=0.000e+00
+Epoch 440/1000 | loss=2.021e-03 | data=2.021e-03 | reg=0.000e+00
+Epoch 450/1000 | loss=3.445e-04 | data=3.445e-04 | reg=0.000e+00
+Epoch 460/1000 | loss=3.362e-04 | data=3.362e-04 | reg=0.000e+00
+Epoch 470/1000 | loss=8.072e-04 | data=8.072e-04 | reg=0.000e+00
+Epoch 480/1000 | loss=4.497e-04 | data=4.497e-04 | reg=0.000e+00
+Epoch 490/1000 | loss=2.456e-04 | data=2.456e-04 | reg=0.000e+00
+Epoch 500/1000 | loss=7.843e-04 | data=7.843e-04 | reg=0.000e+00
+Epoch 510/1000 | loss=1.414e-05 | data=1.414e-05 | reg=0.000e+00
+Epoch 520/1000 | loss=1.158e-04 | data=1.158e-04 | reg=0.000e+00
+Epoch 530/1000 | loss=4.091e-04 | data=4.091e-04 | reg=0.000e+00
+Epoch 540/1000 | loss=2.831e-04 | data=2.831e-04 | reg=0.000e+00
+Epoch 550/1000 | loss=1.397e-04 | data=1.397e-04 | reg=0.000e+00
+Epoch 560/1000 | loss=3.079e-04 | data=3.079e-04 | reg=0.000e+00
+Epoch 570/1000 | loss=1.252e-04 | data=1.252e-04 | reg=0.000e+00
+Epoch 580/1000 | loss=4.681e-04 | data=4.681e-04 | reg=0.000e+00
+Epoch 590/1000 | loss=3.744e-04 | data=3.744e-04 | reg=0.000e+00
+Epoch 600/1000 | loss=8.053e-05 | data=8.053e-05 | reg=0.000e+00
+Epoch 610/1000 | loss=2.909e-04 | data=2.909e-04 | reg=0.000e+00
+Epoch 620/1000 | loss=4.034e-04 | data=4.034e-04 | reg=0.000e+00
+Epoch 630/1000 | loss=2.921e-04 | data=2.921e-04 | reg=0.000e+00
+Epoch 640/1000 | loss=1.488e-04 | data=1.488e-04 | reg=0.000e+00
+Epoch 650/1000 | loss=9.311e-05 | data=9.311e-05 | reg=0.000e+00
+Epoch 660/1000 | loss=1.726e-04 | data=1.726e-04 | reg=0.000e+00
+Epoch 670/1000 | loss=2.703e-04 | data=2.703e-04 | reg=0.000e+00
+Epoch 680/1000 | loss=1.327e-04 | data=1.327e-04 | reg=0.000e+00
+Epoch 690/1000 | loss=2.410e-04 | data=2.410e-04 | reg=0.000e+00
+Epoch 700/1000 | loss=5.803e-05 | data=5.803e-05 | reg=0.000e+00
+Epoch 710/1000 | loss=5.789e-04 | data=5.789e-04 | reg=0.000e+00
+Epoch 720/1000 | loss=7.416e-05 | data=7.416e-05 | reg=0.000e+00
+Epoch 730/1000 | loss=3.277e-04 | data=3.277e-04 | reg=0.000e+00
+Epoch 740/1000 | loss=1.589e-04 | data=1.589e-04 | reg=0.000e+00
+Epoch 750/1000 | loss=1.849e-04 | data=1.849e-04 | reg=0.000e+00
+Epoch 760/1000 | loss=6.253e-04 | data=6.253e-04 | reg=0.000e+00
+Epoch 770/1000 | loss=1.270e-04 | data=1.270e-04 | reg=0.000e+00
+Epoch 780/1000 | loss=1.723e-04 | data=1.723e-04 | reg=0.000e+00
+Epoch 790/1000 | loss=2.735e-04 | data=2.735e-04 | reg=0.000e+00
+Epoch 800/1000 | loss=1.192e-04 | data=1.192e-04 | reg=0.000e+00
+Epoch 810/1000 | loss=4.277e-05 | data=4.277e-05 | reg=0.000e+00
+Epoch 820/1000 | loss=9.162e-05 | data=9.162e-05 | reg=0.000e+00
+Epoch 830/1000 | loss=4.851e-04 | data=4.851e-04 | reg=0.000e+00
+Epoch 840/1000 | loss=1.993e-04 | data=1.993e-04 | reg=0.000e+00
+Epoch 850/1000 | loss=4.121e-04 | data=4.121e-04 | reg=0.000e+00
+Epoch 860/1000 | loss=3.939e-03 | data=3.939e-03 | reg=0.000e+00
+Epoch 870/1000 | loss=3.130e-04 | data=3.130e-04 | reg=0.000e+00
+Epoch 880/1000 | loss=2.236e-04 | data=2.236e-04 | reg=0.000e+00
+Epoch 890/1000 | loss=5.617e-05 | data=5.617e-05 | reg=0.000e+00
+Epoch 900/1000 | loss=2.717e-04 | data=2.717e-04 | reg=0.000e+00
+Epoch 910/1000 | loss=4.059e-04 | data=4.059e-04 | reg=0.000e+00
+Epoch 920/1000 | loss=1.344e-04 | data=1.344e-04 | reg=0.000e+00
+Epoch 930/1000 | loss=7.701e-04 | data=7.701e-04 | reg=0.000e+00
+Epoch 940/1000 | loss=3.193e-04 | data=3.193e-04 | reg=0.000e+00
+Epoch 950/1000 | loss=1.826e-04 | data=1.826e-04 | reg=0.000e+00
+Epoch 960/1000 | loss=2.443e-04 | data=2.443e-04 | reg=0.000e+00
+Epoch 970/1000 | loss=1.341e-04 | data=1.341e-04 | reg=0.000e+00
+Epoch 980/1000 | loss=5.022e-04 | data=5.022e-04 | reg=0.000e+00
+Epoch 990/1000 | loss=2.772e-04 | data=2.772e-04 | reg=0.000e+00
+Epoch 1000/1000 | loss=1.050e-04 | data=1.050e-04 | reg=0.000e+00
+Done. Time(s): 767.99
+Saved: /home/akalout/One_network_SI/data_single_inclusion_R3_BC_wavelets_orig/train_runs_DtN_new/gammaNN_DtN_steps_36750.pth
+
+[rep 3/30] training for 1000 epochs
+[dense] interior unknowns=3844, dense A ~ 56.4 MB (float32)
+Training 1000 epochs | batch_k=4 | solver=dense
+Epoch 10/1000 | loss=4.438e-04 | data=4.438e-04 | reg=0.000e+00
+Epoch 20/1000 | loss=6.456e-05 | data=6.456e-05 | reg=0.000e+00
+Epoch 30/1000 | loss=8.165e-05 | data=8.165e-05 | reg=0.000e+00
+Epoch 40/1000 | loss=5.159e-04 | data=5.159e-04 | reg=0.000e+00
+Epoch 50/1000 | loss=6.466e-05 | data=6.466e-05 | reg=0.000e+00
+Epoch 60/1000 | loss=1.952e-04 | data=1.952e-04 | reg=0.000e+00
+Epoch 70/1000 | loss=1.017e-03 | data=1.017e-03 | reg=0.000e+00
+Epoch 80/1000 | loss=4.579e-04 | data=4.579e-04 | reg=0.000e+00
+Epoch 90/1000 | loss=4.560e-04 | data=4.560e-04 | reg=0.000e+00
+Epoch 100/1000 | loss=1.263e-03 | data=1.263e-03 | reg=0.000e+00
+Epoch 110/1000 | loss=2.402e-04 | data=2.402e-04 | reg=0.000e+00
+Epoch 120/1000 | loss=1.504e-04 | data=1.504e-04 | reg=0.000e+00
+Epoch 130/1000 | loss=3.087e-04 | data=3.087e-04 | reg=0.000e+00
+Epoch 140/1000 | loss=7.713e-05 | data=7.713e-05 | reg=0.000e+00
+Epoch 150/1000 | loss=2.460e-03 | data=2.460e-03 | reg=0.000e+00
+Epoch 160/1000 | loss=1.074e-04 | data=1.074e-04 | reg=0.000e+00
+Epoch 170/1000 | loss=7.032e-05 | data=7.032e-05 | reg=0.000e+00
+Epoch 180/1000 | loss=7.803e-05 | data=7.803e-05 | reg=0.000e+00
+Epoch 190/1000 | loss=1.512e-04 | data=1.512e-04 | reg=0.000e+00
+Epoch 200/1000 | loss=1.195e-04 | data=1.195e-04 | reg=0.000e+00
