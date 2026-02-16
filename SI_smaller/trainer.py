@@ -262,10 +262,10 @@ class InverseDtNTrainer:
 
             # --- REPLACE your im0/im1/colorbar code with this ---
             im0 = ax[0].imshow(gamma_hat, origin="lower", extent=[0,1,0,1], vmin=vmin, vmax=vmax)
-            ax[0].set_title("Recovered γ")
+            fig.colorbar(im0, ax=ax[0]); ax[0].set_title("Recovered γ")
 
             im1 = ax[1].imshow(gamma_true, origin="lower", extent=[0,1,0,1], vmin=vmin, vmax=vmax)
-            ax[1].set_title("True γ")
+            fig.colorbar(im1, ax=ax[1]); ax[1].set_title("True γ")
 
             # one shared colorbar for BOTH (so it’s guaranteed the same)
             #fig.colorbar(im0, ax=[ax[0], ax[1]])
