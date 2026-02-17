@@ -1,7 +1,9 @@
 # run.py  (robust DtN inversion runner — keeps YOUR style, adds:
 #   (1) boundary ordering auto-fix
 #   (2) solver="auto" option for dense/cg selection
-#   (3) cluster-safe headless plotting fallback)
+#   (3) cluster-safe headless plotting fallback
+#   (4) >>> NEW: resume from checkpoint into new folder (resumed_runs)
+#   (5) >>> NEW: recompute cached Fourier features after loading (important)
 
 import os
 import time
@@ -12,12 +14,20 @@ import matplotlib
 matplotlib.use("Agg")
 import matplotlib.pyplot as plt
 
+import torch                      # >>> NEW (needed for no_grad + recache)
 import torch.nn as nn
 
 from dataset_kwise import CalderonBoundaryKDataset
 from trainer import InverseDtNTrainer
 
 t0 = time.process_time()
+
+# ============================================================
+# >>> NEW: RESUME SETTINGS
+# ============================================================
+RESUME_TRAINING = True
+CKPT_FILENAME = "gammaNN_DtN_steps_201250.pth"   # checkpoint file name (inside train_runs_DtN)
+RESUME_TAG = "from_steps_201250"                # subfolder name inside resumed_runs
 
 
 # =========================
@@ -82,8 +92,6 @@ def _choose_linear_solver(grid_N: int, prefer: str = "auto") -> str:
     if prefer in ("dense", "cg"):
         return prefer
     # auto policy:
-    # - dense OK around N<=64 (maybe <=80 depending on memory)
-    # - cg for bigger N
     return "dense" if grid_N <= 64 else "cg"
 
 
@@ -94,8 +102,6 @@ CASES = ["two_inclusions"]
 
 NOISE_LEVELS = {
     "0pct": 0.0,
-    # "1pct": 0.01,
-    # "5pct": 0.05,
 }
 
 # =========================
@@ -108,15 +114,15 @@ reps = 20
 plot_every = 2
 k_plot_list = [0, 10, 20, 30]  # will be clipped automatically
 
-# Prefer solver: "auto" recommended (dense for 64, cg otherwise)
 SOLVER_PREF = "auto"
+
 
 for case in CASES:
     for noise_str, noise_val in NOISE_LEVELS.items():
 
         current_dir = os.getcwd()
 
-        # ---- data path (edit folder name if needed) ----
+        # ---- data path ----
         data_filepath = os.path.join(
             current_dir,
             "data_two_inclusions_BC_wavelets",
@@ -128,9 +134,23 @@ for case in CASES:
         print("Data:", data_filepath)
         print("=" * 60 + "\n")
 
-        # ---- saving path (your style) ----
-        saving_path = os.path.join(os.path.dirname(data_filepath), "train_runs_DtN")
+        # ------------------------------------------------------------
+        # >>> CHANGED: old runs folder + checkpoint path (scalable)
+        # ------------------------------------------------------------
+        base_data_dir = os.path.dirname(data_filepath)
+        old_runs_dir = os.path.join(base_data_dir, "train_runs_DtN")
+        ckpt_path = os.path.join(old_runs_dir, CKPT_FILENAME)
+
+        # ------------------------------------------------------------
+        # >>> CHANGED: saving path is now in resumed_runs (new folder)
+        # ------------------------------------------------------------
+        saving_path = os.path.join(base_data_dir, "resumed_runs", f"{case}_{noise_str}_{RESUME_TAG}")
         os.makedirs(saving_path, exist_ok=True)
+
+        print("Old runs dir:", old_runs_dir)
+        if RESUME_TRAINING:
+            print("Will resume from:", ckpt_path)
+        print("Saving resumed outputs to:", saving_path)
 
         # ---- dataset ----
         dataset = CalderonBoundaryKDataset(data_filepath, noise_level=noise_val)
@@ -139,7 +159,6 @@ for case in CASES:
         print("number of BC functions (K):", dataset.num_bcs)
         print("boundary coords shape:", tuple(dataset.boundary_coords.shape))
 
-        # Info-only check about dense feasibility
         Nb = int(dataset.boundary_coords.shape[0])
         if Nb == 252:
             print("Boundary points = 252 -> implies grid_N=64 (since 4N-4=252). Dense solve OK.")
@@ -154,14 +173,12 @@ for case in CASES:
         # CONFIG (DtN)
         # =========================
         CONFIG = {
-            # training
-            "epochs": 999999,          # not used directly; we pass epochs explicitly
+            "epochs": 999999,
             "learning_rate": 1e-4,
-            "batch_size_k": dataset.num_bcs,
-            "full_batch": True, 
-            "log_every": 20,
+            "batch_size_k": 4,
+            "log_every": 10,
 
-            # gamma NN
+            # gamma NN (must match checkpoint architecture!)
             "ffe_mapping_size": 128,
             "ffe_scale": 10.0,
             "gamma_net_layers": 4,
@@ -171,17 +188,15 @@ for case in CASES:
             "min_gamma": 0.5,
             "max_gamma": 2.5,
 
-            "use_scheduler": True,  #can use False if i dont want scheduler
+            "use_scheduler": True,
             "lr_decay_gamma": 0.95,
             "lr_decay_step": 5000,
-            "lr_decay_unit": "epoch",   # NEW: "epoch" matches your old code; "step" to be used if i wanna update per optimizer step (many steps per epoch)
+            "lr_decay_unit": "epoch",
 
-            # differentiable PDE solver
-            "linear_solver": linear_solver,  # "dense" or "cg"
+            "linear_solver": linear_solver,
             "cg_max_iter": 80,
             "cg_tol": 1e-8,
 
-            # regularization (start 0 for sanity)
             "lambda_reg": 0.0,
         }
 
@@ -194,6 +209,23 @@ for case in CASES:
             num_bcs=dataset.num_bcs,
             saving_path=saving_path,
         )
+
+        # ------------------------------------------------------------
+        # >>> NEW: Resume from checkpoint (and FIX Fourier cache)
+        # ------------------------------------------------------------
+        if RESUME_TRAINING:
+            if not os.path.isfile(ckpt_path):
+                raise FileNotFoundError(f"Checkpoint not found: {ckpt_path}")
+
+            trainer.load_model(ckpt_path)
+
+            # IMPORTANT: xy_ffe_grid was cached in __init__ using a random B.
+            # After load_model restores ffe.B, you MUST recompute the cached features.
+            with torch.no_grad():
+                trainer.xy_ffe_grid = trainer.ffe.encode(trainer.xy_grid)
+
+            print(f"✅ Resumed. global_step={trainer.global_step}, "
+                  f"history_len={len(trainer.loss_history['total'])}")
 
         # =========================
         # Boundary ordering: auto-fix if needed
@@ -210,7 +242,10 @@ for case in CASES:
         # =========================
         for i in range(reps):
 
-            if i == 0:
+            # --------------------------------------------------------
+            # >>> CHANGED: if resuming, do NOT do the sanity block
+            # --------------------------------------------------------
+            if (i == 0) and (not RESUME_TRAINING):
                 print(f"\n[rep {i+1}/{reps}] sanity training for {check_epochs} epochs")
                 trainer.train(dataset, epochs=check_epochs)
             else:

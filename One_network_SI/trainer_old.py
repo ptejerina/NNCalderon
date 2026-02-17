@@ -96,17 +96,7 @@ class InverseDtNTrainer:
 
     def train(self, dataset, epochs: int | None = None):
         epochs = int(epochs or self.config["epochs"])
-        # --- FULL-BATCH option: one optimizer step per epoch ---
-        K = len(dataset)
-        batch_size_k = int(self.config["batch_size_k"])
-        full_batch = bool(self.config.get("full_batch", False)) or (batch_size_k >= K)
-
-        if full_batch:
-            # one batch contains ALL BCs => exactly one optimizer.step() per epoch
-            dl = DataLoader(dataset, batch_size=K, shuffle=False, drop_last=False)
-        else:
-            dl = DataLoader(dataset, batch_size=batch_size_k, shuffle=True, drop_last=True)
-
+        dl = DataLoader(dataset, batch_size=self.config["batch_size_k"], shuffle=True, drop_last=True)
 
         solver_type = self.config.get("linear_solver", "dense")
         cg_iters = int(self.config.get("cg_max_iter", 60))
@@ -201,14 +191,7 @@ class InverseDtNTrainer:
     # NEW: load_model restores scheduler too (like your old routine)
     # =========================
     def load_model(self, ckpt_path: str):
-        # PyTorch 2.6+ defaults weights_only=True, which breaks checkpoints that store objects (e.g., nn.SiLU in config).
-        # Since this checkpoint is from your own trusted run, load the full checkpoint.
-        try:
-            ckpt = torch.load(ckpt_path, map_location=self.device, weights_only=False)
-        except TypeError:
-        # for older torch versions without weights_only arg
-            ckpt = torch.load(ckpt_path, map_location=self.device)
-
+        ckpt = torch.load(ckpt_path, map_location=self.device)
 
         self.gamma_net.load_state_dict(ckpt["gamma_net_state"])
         self.optimizer.load_state_dict(ckpt["optimizer_state"])
@@ -267,16 +250,10 @@ class InverseDtNTrainer:
             mean_re = np.mean(np.abs((gamma_true - gamma_hat) / (gamma_true + eps)))
             fig, ax = plt.subplots(1,3, figsize=(15,4))
 
-
-
-            vmin = float(np.minimum(gamma_hat.min(), gamma_true.min()))
-            vmax = float(np.maximum(gamma_hat.max(), gamma_true.max()))
-
-            # --- REPLACE your im0/im1/colorbar code with this ---
-            im0 = ax[0].imshow(gamma_hat, origin="lower", extent=[0,1,0,1], vmin=vmin, vmax=vmax)
+            im0 = ax[0].imshow(gamma_hat, origin="lower", extent=[0,1,0,1])
             fig.colorbar(im0, ax=ax[0]); ax[0].set_title("Recovered γ")
 
-            im1 = ax[1].imshow(gamma_true, origin="lower", extent=[0,1,0,1], vmin=vmin, vmax=vmax)
+            im1 = ax[1].imshow(gamma_true, origin="lower", extent=[0,1,0,1])
             fig.colorbar(im1, ax=ax[1]); ax[1].set_title("True γ")
 
             im2 = ax[2].imshow(rel, origin="lower", extent=[0,1,0,1])

@@ -102,7 +102,7 @@ NOISE_LEVELS = {
 # Training schedule (your style)
 # =========================
 check_epochs = 50
-train_epochs = 1000
+train_epochs = 10000
 reps = 30
 
 plot_every = 2
@@ -129,7 +129,7 @@ for case in CASES:
         print("=" * 60 + "\n")
 
         # ---- saving path (your style) ----
-        saving_path = os.path.join(os.path.dirname(data_filepath), "train_runs_DtN")
+        saving_path = os.path.join(os.path.dirname(data_filepath), "train_runs_DtN_full_batch")
         os.makedirs(saving_path, exist_ok=True)
 
         # ---- dataset ----
@@ -157,7 +157,8 @@ for case in CASES:
             # training
             "epochs": 999999,          # not used directly; we pass epochs explicitly
             "learning_rate": 1e-4,
-            "batch_size_k": 4,
+            "batch_size_k": dataset.num_bcs,
+            "full_batch": True, #False if batch size isnt the full set (maybe)
             "log_every": 10,
 
             # gamma NN
