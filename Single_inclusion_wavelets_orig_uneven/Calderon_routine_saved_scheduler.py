@@ -1066,39 +1066,70 @@ class Trainer:
 
         return bnd_coords, f_pred, J_pred
 
-    def plot_loss(self, save_fig = False):
+     #NEWWWW
+    def plot_loss(self, save_fig=False, show_fig=True):
         loss = self.loss_history
         w = self.config['loss_weights']
 
-        DE_loss = w['pde'] * np.array(loss['pde'])
-        f_bc_loss = w['dirichlet_bc'] * np.array(loss['bc'])
-        J_bc_loss = w['neumann_bc'] * np.array(loss['neumann'])
-        force_gamma_addloss = w['force_true_gamma'] * np.array(loss['force_true_gamma'])
-        tot_loss = np.array(loss['total'])
+        tot_loss = np.asarray(loss['total'], dtype=float)
+        de_loss = w['pde'] * np.asarray(loss['pde'], dtype=float)
+        f_bc_loss = w['dirichlet_bc'] * np.asarray(loss['bc'], dtype=float)
+        j_bc_loss = w['neumann_bc'] * np.asarray(loss['neumann'], dtype=float)
 
-        fig = plt.figure(figsize=(5,4))
-        plt.plot(tot_loss, label = 'Tot')
-        plt.plot( DE_loss, label = 'DE')
-        plt.plot( f_bc_loss, label = r'Dirichlet $f_k$')
-        plt.plot( J_bc_loss, label = r'Neumann $J_k$')
-        if w['force_true_gamma'] != 0.0:
-            plt.plot( force_gamma_addloss, label = r'Force $\gamma_{true}$')
+        force_hist = np.asarray(loss.get('force_true_gamma', []), dtype=float)
+        plot_force = (
+            w.get('force_true_gamma', 0.0) != 0.0
+            and len(force_hist) == len(tot_loss)
+        )
+        if plot_force:
+            force_gamma_addloss = w['force_true_gamma'] * force_hist
 
-        plt.yscale('log')
-        plt.legend(loc=(1.01,0.35))
-        if save_fig == True:
-            fig.savefig(f'{self.path}/all_losses_epoch_{len(DE_loss)}.pdf')
-        plt.show()
+        epochs_k = np.arange(1, len(tot_loss) + 1) / 1000.0
 
-        print('Min DE loss', min(DE_loss[:]))
-        print('Min f loss', min(f_bc_loss))
-        print('Min J loss', min(J_bc_loss))
+        fig, ax = plt.subplots(figsize=(7.2, 4.2))
+
+        ax.plot(epochs_k, tot_loss, label='Total', linewidth=2.0)
+        ax.plot(epochs_k, de_loss, label='PDE', linewidth=1.5)
+        ax.plot(epochs_k, f_bc_loss, label=r'Dirichlet $f_k$', linewidth=1.5)
+        ax.plot(epochs_k, j_bc_loss, label=r'Neumann $J_k$', linewidth=1.5)
+
+        if plot_force:
+            ax.plot(
+                epochs_k,
+                force_gamma_addloss,
+                label=r'Force $\gamma_{\mathrm{true}}$',
+                linewidth=1.5
+            )
+
+        ax.set_yscale('log')
+        ax.set_xlabel(r'Epoch ($\times 10^3$)')
+        ax.set_ylabel('Weighted loss')
+        ax.set_title('Training losses')
+        ax.grid(True, which='both', alpha=0.25)
+
+        ax.legend(loc='upper right', frameon=True, fontsize=9)
+
+        fig.tight_layout()
+
+        if save_fig:
+            fig.savefig(
+                f'{self.path}/all_losses_epoch_{len(tot_loss)}.pdf',
+                bbox_inches='tight'
+            )
+
+        if show_fig:
+            plt.show()
+        else:
+            plt.close(fig)
+
+        print('Min DE loss', np.min(de_loss))
+        print('Min f loss', np.min(f_bc_loss))
+        print('Min J loss', np.min(j_bc_loss))
 
     
     def plot_gamma_nn(self, N = 128, save_fig = False):
 
         data = np.load(self.synthetic_data)
-        N = N
 
         gamma_nn = self.predict_gamma(N=N)
 
@@ -1107,28 +1138,44 @@ class Trainer:
         y = torch.linspace(0, 1, N)
 
         # 2D meshgrid
-        X, Y = torch.meshgrid(x, y, indexing="ij")  # shape (N, N)
+        X, Y = torch.meshgrid(x, y, indexing="ij")
 
         # Stack into (N*N, 2) list of coordinates
         xy_grid = torch.stack([X.flatten(), Y.flatten()], dim=-1)
         gamma_true = load_gamma_interpolator(data['gamma_true'])(xy_grid).reshape(N,N).cpu().detach().numpy()
 
         eps = 1e-12
-        # rel_error = np.abs((gamma_true - gamma_nn) / (gamma_true + eps))
         rel_error = np.log10(np.abs((gamma_true - gamma_nn) / (gamma_true + eps)))
         mean_rel_error = np.mean(10**rel_error)
         print('Mean Relative error:', mean_rel_error*100, '%')
 
-        print(gamma_nn.shape)
+        # Common color scale for left and middle panels
+        vmin_g = min(gamma_nn.min(), gamma_true.min())
+        vmax_g = max(gamma_nn.max(), gamma_true.max())
 
         fig,ax = plt.subplots(1,3,figsize=(15,4))
-        im0 = ax[0].imshow(gamma_nn, origin='lower', extent=[0, 1, 0, 1], cmap="viridis")
+
+        im0 = ax[0].imshow(
+            gamma_nn,
+            origin='lower',
+            extent=[0, 1, 0, 1],
+            cmap="viridis",
+            vmin=vmin_g,
+            vmax=vmax_g
+        )
         fig.colorbar(im0, ax=ax[0], label=r"NN $\gamma(x,y)$")
         ax[0].set_title(r"$\gamma^{NN}(x,y)$")
         ax[0].set_xlabel("x")
         ax[0].set_ylabel("y")
 
-        im1 = ax[1].imshow(gamma_true, origin='lower', extent=[0, 1, 0, 1], cmap="viridis")
+        im1 = ax[1].imshow(
+            gamma_true,
+            origin='lower',
+            extent=[0, 1, 0, 1],
+            cmap="viridis",
+            vmin=vmin_g,
+            vmax=vmax_g
+        )
         fig.colorbar(im1, ax=ax[1], label=r"True $\gamma(x,y)$")
         ax[1].set_title(r"True $\gamma(x,y)$")
         ax[1].set_xlabel("x")
@@ -1145,7 +1192,6 @@ class Trainer:
         if save_fig == True:
             fig.savefig(f'{self.path}/gamma_recovered_epoch_{len(DE_loss)}.pdf')
         plt.show()
-
 
     def plot_residuals(self, save_fig = False, show_fig = False):
 
@@ -1222,6 +1268,129 @@ class Trainer:
                     fig.savefig(f'{self.path}/residual_k_{k_choice}_epochs_{n_epochs}.pdf')
             plt.tight_layout()
             if show_fig==True:
+                plt.show()
+            else:
+                plt.close(fig)
+
+    #FIXED NEWWWW
+    def _boundary_perimeter_idx(self, coords, tol=1e-12):
+        """
+        Reproduce the same perimeter ordering convention used in plot_boundary_data:
+        Bottom -> Right -> Top -> Left,
+        while removing the duplicated corner endpoint of each side.
+        """
+        x = coords[:, 0]
+        y = coords[:, 1]
+
+        bottom_idx = np.where(np.abs(y - 0.0) < tol)[0]
+        top_idx    = np.where(np.abs(y - 1.0) < tol)[0]
+        left_idx   = np.where(np.abs(x - 0.0) < tol)[0]
+        right_idx  = np.where(np.abs(x - 1.0) < tol)[0]
+
+        bottom_idx = bottom_idx[np.argsort(x[bottom_idx])]         # left -> right
+        top_idx    = top_idx[np.argsort(x[top_idx])][::-1]         # right -> left
+        right_idx  = right_idx[np.argsort(y[right_idx])]           # bottom -> top
+        left_idx   = left_idx[np.argsort(y[left_idx])][::-1]       # top -> bottom
+
+        perimeter_idx = np.concatenate([
+            bottom_idx[:-1],
+            right_idx[:-1],
+            top_idx[:-1],
+            left_idx[:-1]
+        ])
+
+        return perimeter_idx
+
+    def plot_boundary_fit(self, dataset, k_list=(0,), save_fig=False, show_fig=True):
+        """
+        Plot, for selected k:
+        1) Dirichlet f_k : pred vs measured/true
+        2) Residual Delta f = f_pred - f_true
+        3) Current J_k   : pred vs measured/true
+        4) Residual Delta J = J_pred - J_true
+        using the SAME perimeter ordering convention for both true and predicted.
+        """
+        if isinstance(k_list, int):
+            k_list = [k_list]
+
+        coords = dataset.boundary_coords.detach().cpu().numpy()
+        perimeter_idx = self._boundary_perimeter_idx(coords)
+        afine = np.arange(len(perimeter_idx))
+        seg = len(perimeter_idx) // 4
+
+        n_epochs = len(self.loss_history['total'])
+
+        for k in k_list:
+            # predicted boundary quantities from PINN
+            _, f_pred_t, J_pred_t = self.plot_boundary_predictions(dataset, k_idx=k)
+
+            f_pred = f_pred_t.detach().cpu().numpy().squeeze()[perimeter_idx]
+            J_pred = J_pred_t.detach().cpu().numpy().squeeze()[perimeter_idx]
+
+            # measured/true from dataset, using SAME indexing
+            f_true = dataset.boundary_potentials[k].detach().cpu().numpy().squeeze()[perimeter_idx]
+            J_true = dataset.currents[k].detach().cpu().numpy().squeeze()[perimeter_idx]
+
+            # residuals
+            res_f = f_pred - f_true
+            res_J = J_pred - J_true
+
+            rms_f = np.sqrt(np.mean(res_f**2))
+            rms_J = np.sqrt(np.mean(res_J**2))
+            max_abs_f = np.max(np.abs(res_f))
+            max_abs_J = np.max(np.abs(res_J))
+
+            fig, ax = plt.subplots(1, 4, figsize=(19, 3.2), constrained_layout=True)
+
+            # (1) f comparison
+            ax[0].plot(afine, f_true, label='true/measured', linewidth=1.8)
+            ax[0].plot(afine, f_pred, '--', label='pred', linewidth=1.6)
+            ax[0].set_title(f"Dirichlet $f_k$ (k={k})")
+            ax[0].set_xlabel("Perimeter index")
+            ax[0].set_ylabel("f")
+            ax[0].legend(frameon=False, loc='best')
+
+            # (2) f residual
+            ax[1].plot(afine, res_f, label=rf"$\Delta f$ (RMS={rms_f:.2e})", linewidth=1.6)
+            ax[1].axhline(0.0, color='k', linewidth=0.8)
+            ax[1].set_title(r"Residual $f_{\mathrm{pred}}-f_{\mathrm{true}}$")
+            ax[1].set_xlabel("Perimeter index")
+            ax[1].set_ylabel(r"$\Delta f$")
+            ax[1].legend(frameon=False, loc='best')
+
+            # (3) J comparison
+            ax[2].plot(afine, J_true, label='measured/true', linewidth=1.8)
+            ax[2].plot(afine, J_pred, '--', label='pred', linewidth=1.6)
+            ax[2].set_title(f"Current $J_k$ (k={k})")
+            ax[2].set_xlabel("Perimeter index")
+            ax[2].set_ylabel("J")
+            ax[2].legend(frameon=False, loc='best')
+
+            # (4) J residual
+            ax[3].plot(afine, res_J, label=rf"$\Delta J$ (RMS={rms_J:.2e})", linewidth=1.6)
+            ax[3].axhline(0.0, color='k', linewidth=0.8)
+            ax[3].set_title(r"Residual $J_{\mathrm{pred}}-J_{\mathrm{meas}}$")
+            ax[3].set_xlabel("Perimeter index")
+            ax[3].set_ylabel(r"$\Delta J$")
+            ax[3].legend(frameon=False, loc='best')
+
+            for a in ax:
+                for i in range(1, 4):
+                    a.axvline(i * seg, color='k', linestyle='--', linewidth=0.5)
+                a.grid(True, alpha=0.2)
+
+            fig.suptitle(
+                f"k={k} | RMS(Δf)={rms_f:.2e} | RMS(ΔJ)={rms_J:.2e} | "
+                f"max|Δf|={max_abs_f:.2e} | max|ΔJ|={max_abs_J:.2e}"
+            )
+
+            if save_fig:
+                fig.savefig(
+                    os.path.join(self.path, f"boundary_fit_k_{k}_epoch_{n_epochs}.pdf"),
+                    bbox_inches='tight'
+                )
+
+            if show_fig:
                 plt.show()
             else:
                 plt.close(fig)
