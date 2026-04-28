@@ -1,0 +1,10 @@
+PWD = /home/akalout/CALDERON_PINNS/Gaussian_0.2
+Python = /home/akalout/ali_env/bin/python3
+Running = /home/akalout/CALDERON_PINNS/Gaussian_0.2/run_gaussian_0.2_no_ffe.py
+/home/akalout/CALDERON_PINNS/Gaussian_0.2/data_gaussian_0.2/dtn_data_gaussian_inclusion.npz
+grid size 64
+number of BC functions 140
+Saving directory created: /home/akalout/CALDERON_PINNS/Gaussian_0.2/data_gaussian_0.2/train_runs_Silu
+Using device: cuda
+Starting training for case: gaussian_inclusion, noise: 0pct
+forward pass through gamma NN !
