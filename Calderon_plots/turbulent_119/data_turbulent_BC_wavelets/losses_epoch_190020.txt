@@ -1,0 +1,25 @@
+Loss values for NN_epochs_190020
+========================================
+
+Epoch: 190020
+
+Saved raw losses:
+total_loss_saved: 2.4086992740631104
+pde_loss_raw: 2.1813039779663086
+dirichlet_loss_raw: 6.0268212109804153e-05
+neumann_loss_raw: 0.016712704673409462
+
+Loss weights used in training:
+pde_weight: 1.0
+dirichlet_weight: 1000.0
+neumann_weight: 10.0
+force_true_gamma_weight: 0.0
+
+Weighted contributions:
+pde_loss_weighted: 2.1813039779663086
+dirichlet_loss_weighted: 0.06026821210980415
+neumann_loss_weighted: 0.16712704673409462
+
+Check:
+reconstructed_total_from_components: 2.4086992368102074
+saved_total_loss: 2.4086992740631104
