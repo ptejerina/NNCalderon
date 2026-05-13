@@ -104,19 +104,25 @@
 import numpy as np
 import matplotlib.pyplot as plt
 
-K = np.array([50, 90, 140, 190])
+K = np.array([15, 30, 50, 90, 140, 175, 190])
 
 mse_gamma = np.array([
+    8.48189890e-02,
+    3.62228826e-02,
     4.62687761e-02,
     7.96469301e-02,
     2.66038794e-02,
+    3.94527540e-02,
     3.81260626e-02
 ])
 
 mean_relative_error = np.array([
+    9.77338982,
+    8.97268486,
     8.92292595,
     12.2840424,
     8.02315903,
+    9.37011242,
     8.98360920
 ])
 
@@ -157,7 +163,7 @@ axes[1].set_title(r"Mean relative error of $\gamma$ (%)")
 axes[1].grid(True, alpha=0.3)
 
 for ax in axes:
-    ax.set_xticks([50, 90, 140, 155, 175, 190])
+    ax.set_xticks([15, 30, 50, 90, 140, 155, 175, 190])
     ax.tick_params(direction="in", length=5, width=1.0)
 
 plt.savefig("wavelet_ablation_single_inclusion.png", bbox_inches="tight")
