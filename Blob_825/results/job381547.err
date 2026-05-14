@@ -1,0 +1,9 @@
+Traceback (most recent call last):
+  File "/home/akalout/CALDERON_PINNS/Blob_825/run_blobs_825_wavelets.py", line 71, in <module>
+    trainer = Trainer(CONFIG, num_bcs=dataset.num_bcs, synthetic_data=data_filepath, saving_path=saving_path,\
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/akalout/CALDERON_PINNS/Blob_825/Calderon_routine_saved_scheduler_pablo.py", line 568, in __init__
+    os.mkdir(self.path) 
+    ^^^^^^^^^^^^^^^^^^^
+FileExistsError: [Errno 17] File exists: '/home/akalout/CALDERON_PINNS/Blob_825/data_blob_825/test_fixed_seed_42'
+slurmstepd-gn03: error: *** JOB 381547 ON gn03 CANCELLED AT 2026-05-08T16:20:00 ***

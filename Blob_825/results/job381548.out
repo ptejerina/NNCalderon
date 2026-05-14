@@ -1,0 +1,32 @@
+/home/akalout/CALDERON_PINNS/Blob_825/data_blob_825/dtn_data_random_blobs.npz
+/home/akalout/CALDERON_PINNS/Blob_825/data_blob_825/test_fixed_seed_42
+grid size 64
+number of BC functions 140
+Saving directory exists: /home/akalout/CALDERON_PINNS/Blob_825/data_blob_825/test_fixed_seed_42
+Seed 42
+Using device: cuda
+Starting training for case: random_blobs, noise: 0pct
+forward pass through gamma NN !
+Training finished. Total time: 106.39s
+Model succesfully saved
+Min DE loss 8.669704953945256e-09
+Min f loss 1012.4608278274536
+Min J loss 2093.7049865722656
+Mean Relative error: 57.416218 %
+Saved plot 0
+Saved plot 10
+Saved plot 20
+Saved plot 30
+Saved plot 40
+Saved plot 49
+Saved plot 0
+Saved plot 10
+Saved plot 20
+Saved plot 30
+Saved plot 40
+Saved plot 49
+Saved plot 0
+Saved plot 10
+Saved plot 20
+Saved plot 49
+Starting training for case: random_blobs, noise: 0pct
