@@ -290,9 +290,14 @@ def plot_reconstruction_panel(
         ffe_ckpt = exp["ffe_ckpt"]
         noffe_ckpt = exp["noffe_ckpt"]
 
-        gamma_min = exp.get("gamma_min", 0.2)
-        gamma_max = exp.get("gamma_max", 2.5)
-        actv_last_layer = exp.get("actv_last_layer", True)
+        gamma_min_ffe = exp.get("gamma_min_ffe", exp.get("gamma_min", 0.2))
+        gamma_max_ffe = exp.get("gamma_max_ffe", exp.get("gamma_max", 2.5))
+
+        gamma_min_noffe = exp.get("gamma_min_noffe", exp.get("gamma_min", 0.2))
+        gamma_max_noffe = exp.get("gamma_max_noffe", exp.get("gamma_max", 2.5))
+
+        actv_last_layer_ffe = exp.get("actv_last_layer_ffe", exp.get("actv_last_layer", True))
+        actv_last_layer_noffe = exp.get("actv_last_layer_noffe", exp.get("actv_last_layer", True))
 
         gamma_true = load_true_gamma(data_path, N=N)
 
@@ -300,18 +305,18 @@ def plot_reconstruction_panel(
             ffe_ckpt,
             N=N,
             device=device,
-            gamma_min=gamma_min,
-            gamma_max=gamma_max,
-            actv_last_layer=actv_last_layer,
+            gamma_min=gamma_min_ffe,
+            gamma_max=gamma_max_ffe,
+            actv_last_layer=actv_last_layer_ffe,
         )
 
         gamma_noffe, _ = predict_gamma_from_checkpoint(
             noffe_ckpt,
             N=N,
             device=device,
-            gamma_min=gamma_min,
-            gamma_max=gamma_max,
-            actv_last_layer=actv_last_layer,
+            gamma_min=gamma_min_noffe,
+            gamma_max=gamma_max_noffe,
+            actv_last_layer=actv_last_layer_noffe,
         )
 
         re_ffe = mean_relative_error_percent(gamma_ffe, gamma_true)
@@ -516,42 +521,49 @@ if __name__ == "__main__":
 
     experiments_inclusions = [
         {
-            "label": r"Single incl., $R=0.2$",
-            "data": "Single_inclusion_R1\data_single_inclusion_BC_wavelets_orig\dtn_data_single_inclusion.npz",
-            "ffe_ckpt": "Single_inclusion_R1/results_ffe/NN_epochs_291000",
-            "noffe_ckpt": "Single_inclusion_R1/results_no_ffe/NN_epochs_291000",
-            "gamma_min": 0.5,
-            "gamma_max": 2.5,
+            
+            "label": r"Gaussian, $\sigma=0.2$",
+            "data": r"gaussian_0.2\data_gaussian_0.2\dtn_data_gaussian_inclusion.npz",
+            "ffe_ckpt": r"gaussian_0.2/results_ffe/NN_epochs_260200",
+            "noffe_ckpt": r"gaussian_0.2/results_no_ffe/NN_epochs_311000",
+
+            "gamma_min_ffe": 0.5,
+            "gamma_max_ffe": 10.0,
+
+            "gamma_min_noffe": 0.5,
+            "gamma_max_noffe": 2.5,
+
         },
-        # {
-        #     "label": r"Single incl., $R=0.15$",
-        #     "data": "data_single_inclusion_R_0.15_140_wavelets/dtn_data_single_inclusion.npz",
-        #     "ffe_ckpt": "data_single_inclusion_R_0.15_140_wavelets/results_ffe/NN_epochs_537000",
-        #     "noffe_ckpt": "data_single_inclusion_R_0.15_140_wavelets/results_no_ffe/NN_epochs_537000",
-        #     "gamma_min": 0.5,
-        #     "gamma_max": 2.5,
-        # },
+       
         {
-            "label": r"Two inclusions",
-            "data": "Two_inclusions\data_two_inclusions_BC_wavelets\dtn_data_two_inclusions.npz",
-            "ffe_ckpt": "Two_inclusions/results_ffe/NN_epochs_587000",
-            "noffe_ckpt": "Two_inclusions/results_no_ffe/NN_epochs_321000",
+            "label": r"Inv. shifted gaussian",
+            "data": "INV_gaussian\data_inverted_gaussian_shifted_wavelets\dtn_data_inverted_gaussian_shifted_wavelets.npz",
+            "ffe_ckpt": "INV_gaussian/results_ffe/NN_epochs_161000",
+            "noffe_ckpt": "INV_gaussian/results_no_ffe/NN_epochs_280010",
             "gamma_min": 0.5,
             "gamma_max": 2.5,
         },
         {
-            "label": r"Piecewise const.",
-            "data": "Horizontal_split\data_horizontal_split_BC_wavelets\dtn_data_horizontal_split_wavelets.npz",
-            "ffe_ckpt": "Horizontal_split/results_ffe/NN_epochs_161000",
-            "noffe_ckpt": "Horizontal_split/results_no_ffe/NN_epochs_290010",
-            "gamma_min": 0.5,
-            "gamma_max": 2.5,
+            "label": r"Radial sym. sine",
+            "data": "radial_sym_sine\data_radially_sym_sine_BC_wavelets\dtn_data_radially_sym_sine.npz",
+            "ffe_ckpt": "radial_sym_sine/results_ffe/NN_epochs_617000",
+            "noffe_ckpt": "radial_sym_sine/results_no_ffe/NN_epochs_231000",
+            "gamma_min": 0.25,
+            "gamma_max": 1.8,
         },
+        {
+            "label": r"Fourierboard",
+            "data": "fourierboard\data_fourierboard_wavelets\dtn_data_fourierboard.npz",
+            "ffe_ckpt": "fourierboard/results_ffe/NN_epochs_400300",
+            "noffe_ckpt": "fourierboard/results_no_ffe/NN_epochs_392000",
+            "gamma_min": 0.5,
+            "gamma_max": 10.0,
+        }
     ]
 
     plot_reconstruction_panel(
         experiments=experiments_inclusions,
-        output_path="paper_panels/reconstructions_inclusions_ffe_vs_noffe.pdf",
+        output_path="paper_panels_smooth/smooth_reconstructions.pdf",
         N=128,
         use_true_scale=False,
         show_metrics_in_titles=False,
