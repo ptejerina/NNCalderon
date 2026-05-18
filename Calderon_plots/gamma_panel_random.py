@@ -525,13 +525,13 @@ if __name__ == "__main__":
             "label": r"Blobs_1",
             "data": r"blobs_825/data_random_blobs_BC_wavelets/dtn_data_random_blobs.npz",
             "ffe_ckpt": r"blobs_825/results_ffe/NN_epochs_400110",
-            "noffe_ckpt": r"blobs_825/results_no_ffe/NN_epochs_110100",
+            "noffe_ckpt": r"blobs_825/results_no_ffe/NN_epochs_210100",
 
             "gamma_min_ffe": 0.5,
             "gamma_max_ffe": 10.0,
 
             "gamma_min_noffe": 0.5,
-            "gamma_max_noffe": 2.5,
+            "gamma_max_noffe": 10.0,
 
         },
        
@@ -539,12 +539,12 @@ if __name__ == "__main__":
             "label": r"Blobs_2",
             "data": "blobs_886/data_random_blobs_BC_wavelets/dtn_data_random_blobs.npz",
             "ffe_ckpt": "blobs_886/results_ffe/NN_epochs_400200",
-            "noffe_ckpt": "blobs_886/results_no_ffe/NN_epochs_220100",
+            "noffe_ckpt": "blobs_886/results_no_ffe/NN_epochs_210100",
             "gamma_min_ffe": 0.5,
             "gamma_max_ffe": 10.0,
 
             "gamma_min_noffe": 0.5,
-            "gamma_max_noffe": 2.5,
+            "gamma_max_noffe": 10.0,
         },
         {
             "label": r"Clouds_1",
@@ -566,7 +566,7 @@ if __name__ == "__main__":
 
     plot_reconstruction_panel(
         experiments=experiments_inclusions,
-        output_path="paper_panels_random/random_reconstructions.pdf",
+        output_path="paper_panels_random/random_reconstructions_fixed_scaling.pdf",
         N=128,
         use_true_scale=False,
         show_metrics_in_titles=False,

@@ -523,14 +523,14 @@ if __name__ == "__main__":
             "gamma_min": 0.5,
             "gamma_max": 2.5,
         },
-        # {
-        #     "label": r"Single incl., $R=0.15$",
-        #     "data": "data_single_inclusion_R_0.15_140_wavelets/dtn_data_single_inclusion.npz",
-        #     "ffe_ckpt": "data_single_inclusion_R_0.15_140_wavelets/results_ffe/NN_epochs_537000",
-        #     "noffe_ckpt": "data_single_inclusion_R_0.15_140_wavelets/results_no_ffe/NN_epochs_537000",
-        #     "gamma_min": 0.5,
-        #     "gamma_max": 2.5,
-        # },
+        {
+            "label": r"Single incl., $R=0.15$",
+            "data": "Single_inclusion_R2\data_single_inclusion_R2_BC_wavelets_orig\dtn_data_single_inclusion.npz",
+            "ffe_ckpt": "Single_inclusion_R2/results_ffe/NN_epochs_577000",
+            "noffe_ckpt": "Single_inclusion_R2/results_no_ffe/NN_epochs_241000",
+            "gamma_min": 0.5,
+            "gamma_max": 2.5,
+        },
         {
             "label": r"Two inclusions",
             "data": "Two_inclusions\data_two_inclusions_BC_wavelets\dtn_data_two_inclusions.npz",
