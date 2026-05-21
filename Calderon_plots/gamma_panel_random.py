@@ -520,32 +520,32 @@ if __name__ == "__main__":
     # put the same values here.
 
     experiments_inclusions = [
-        {
+        # {
             
-            "label": r"Blobs_1",
-            "data": r"blobs_825/data_random_blobs_BC_wavelets/dtn_data_random_blobs.npz",
-            "ffe_ckpt": r"blobs_825/results_ffe/NN_epochs_400110",
-            "noffe_ckpt": r"blobs_825/results_no_ffe/NN_epochs_210100",
+        #     "label": r"Blobs_1",
+        #     "data": r"blobs_825/data_random_blobs_BC_wavelets/dtn_data_random_blobs.npz",
+        #     "ffe_ckpt": r"blobs_825/results_ffe/NN_epochs_400110",
+        #     "noffe_ckpt": r"blobs_825/results_no_ffe/NN_epochs_210100",
 
-            "gamma_min_ffe": 0.5,
-            "gamma_max_ffe": 10.0,
+        #     "gamma_min_ffe": 0.5,
+        #     "gamma_max_ffe": 10.0,
 
-            "gamma_min_noffe": 0.5,
-            "gamma_max_noffe": 10.0,
+        #     "gamma_min_noffe": 0.5,
+        #     "gamma_max_noffe": 10.0,
 
-        },
+        # },
        
-        {
-            "label": r"Blobs_2",
-            "data": "blobs_886/data_random_blobs_BC_wavelets/dtn_data_random_blobs.npz",
-            "ffe_ckpt": "blobs_886/results_ffe/NN_epochs_400200",
-            "noffe_ckpt": "blobs_886/results_no_ffe/NN_epochs_210100",
-            "gamma_min_ffe": 0.5,
-            "gamma_max_ffe": 10.0,
+        # {
+        #     "label": r"Blobs_2",
+        #     "data": "blobs_886/data_random_blobs_BC_wavelets/dtn_data_random_blobs.npz",
+        #     "ffe_ckpt": "blobs_886/results_ffe/NN_epochs_400200",
+        #     "noffe_ckpt": "blobs_886/results_no_ffe/NN_epochs_210100",
+        #     "gamma_min_ffe": 0.5,
+        #     "gamma_max_ffe": 10.0,
 
-            "gamma_min_noffe": 0.5,
-            "gamma_max_noffe": 10.0,
-        },
+        #     "gamma_min_noffe": 0.5,
+        #     "gamma_max_noffe": 10.0,
+        # },
         {
             "label": r"Clouds_1",
             "data": "turbulent_119/data_turbulent_BC_wavelets/dtn_data_random_turbulent.npz",

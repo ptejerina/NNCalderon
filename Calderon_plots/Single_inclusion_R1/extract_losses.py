@@ -1,7 +1,7 @@
 import torch
 import os
 
-path = "data_single_inclusion_BC_wavelets_orig/NN_epochs_291000"
+path = "results_no_ffe/NN_epochs_291000"
 ckpt = torch.load(path, map_location="cpu")
 
 total_hist = ckpt["train_loss"]

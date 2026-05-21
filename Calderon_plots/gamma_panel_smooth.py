@@ -362,7 +362,7 @@ def plot_reconstruction_panel(
             if j != 0:
                 ax.set_yticklabels([])
             else:
-                ax.set_ylabel(label, fontsize=12, labelpad=25)
+                ax.set_ylabel(label, fontsize=12, labelpad=35)
 
             if i == nrows - 1:
                 ax.set_xlabel("")
@@ -522,7 +522,7 @@ if __name__ == "__main__":
     experiments_inclusions = [
         {
             
-            "label": r"Gaussian, $\sigma=0.2$",
+            "label": r"Gauss., $\sigma=0.2$",
             "data": r"gaussian_0.2\data_gaussian_0.2\dtn_data_gaussian_inclusion.npz",
             "ffe_ckpt": r"gaussian_0.2/results_ffe/NN_epochs_260200",
             "noffe_ckpt": r"gaussian_0.2/results_no_ffe/NN_epochs_311000",
@@ -536,13 +536,41 @@ if __name__ == "__main__":
         },
        
         {
-            "label": r"Inv. shifted gaussian",
+            "label": r"Inv. shifted gauss.",
             "data": "INV_gaussian\data_inverted_gaussian_shifted_wavelets\dtn_data_inverted_gaussian_shifted_wavelets.npz",
             "ffe_ckpt": "INV_gaussian/results_ffe/NN_epochs_161000",
             "noffe_ckpt": "INV_gaussian/results_no_ffe/NN_epochs_280010",
             "gamma_min": 0.5,
             "gamma_max": 2.5,
         },
+
+        {
+            
+            "label": r"Blobs_1",
+            "data": r"blobs_825/data_random_blobs_BC_wavelets/dtn_data_random_blobs.npz",
+            "ffe_ckpt": r"blobs_825/results_ffe/NN_epochs_400110",
+            "noffe_ckpt": r"blobs_825/results_no_ffe/NN_epochs_210100",
+
+            "gamma_min_ffe": 0.5,
+            "gamma_max_ffe": 10.0,
+
+            "gamma_min_noffe": 0.5,
+            "gamma_max_noffe": 10.0,
+
+        },
+       
+        {
+            "label": r"Blobs_2",
+            "data": "blobs_886/data_random_blobs_BC_wavelets/dtn_data_random_blobs.npz",
+            "ffe_ckpt": "blobs_886/results_ffe/NN_epochs_400200",
+            "noffe_ckpt": "blobs_886/results_no_ffe/NN_epochs_210100",
+            "gamma_min_ffe": 0.5,
+            "gamma_max_ffe": 10.0,
+
+            "gamma_min_noffe": 0.5,
+            "gamma_max_noffe": 10.0,
+        },
+
         {
             "label": r"Radial sym. sine",
             "data": "radial_sym_sine\data_radially_sym_sine_BC_wavelets\dtn_data_radially_sym_sine.npz",
@@ -563,7 +591,7 @@ if __name__ == "__main__":
 
     plot_reconstruction_panel(
         experiments=experiments_inclusions,
-        output_path="paper_panels_smooth/smooth_reconstructions.pdf",
+        output_path="paper_panels_smooth/smooth_reconstructions_with_blobs.pdf",
         N=128,
         use_true_scale=False,
         show_metrics_in_titles=False,

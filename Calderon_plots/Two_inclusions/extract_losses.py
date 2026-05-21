@@ -1,7 +1,7 @@
 import torch
 import os
 
-path = "data_two_inclusions_BC_wavelets/NN_epochs_587000"
+path = "results_no_ffe\\NN_epochs_321000"
 ckpt = torch.load(path, map_location="cpu")
 
 total_hist = ckpt["train_loss"]
@@ -22,10 +22,10 @@ weighted_neumann = weights["neumann_bc"] * neumann_last
 reconstructed_total = weighted_pde + weighted_dirichlet + weighted_neumann
 
 # txt output path
-txt_path = os.path.join(os.path.dirname(path), "losses_epoch_587000.txt")
+txt_path = os.path.join(os.path.dirname(path), "losses_epoch_321000.txt")
 
 with open(txt_path, "w") as f:
-    f.write("Loss values for NN_epochs_587000\n")
+    f.write("Loss values for NN_epochs_321000\n")
     f.write("=" * 40 + "\n\n")
 
     f.write(f"Epoch: {len(total_hist)}\n\n")

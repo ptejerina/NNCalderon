@@ -1,0 +1,111 @@
+% \subsubsection{Conceptual and hyperparameter specifications of the training procedure} \label{subsec: specifications}
+% \AK{too long, either delete or merge with above, what do you think? should keep ffe section though}
+
+% We present first specifications on the sampling of the discrete set of points in the interior of the domain xi∈int(Ω)\mathbf{x}_i\in int(\Omega) and the boundary xj∈∂Ωx_j\in\partial\Omega, and specifications on the batching procedure for the set of BCs, {fk,Jk}\{f_k,J_k\}. Then present specifications on the computation of each training step, and finally specifications on the optimizer and hyperparameters used during training.
+
+% \begin{itemize}
+    
+%     \item \textbf{Interior collocation sampling.} At each optimization step, a fresh batch of interior collocation points is sampled in the domain Ω=[0,1]2\Omega=[0,1]^2. In the runs presented here, we use uniform random sampling in the interior, with batch size
+%     \[
+%     N_{\mathrm{PDE}}=4096.
+%     \]
+%     The code also supports non-uniform center-biased sampling strategies, but the results shown in this work use uniform sampling unless stated otherwise.
+
+%     \item \textbf{Fourier-feature encoding.} We fourier encode the coordinates (see 
+
+%     \item \textbf{Boundary dataset.} Boundary coordinates, outward unit normals, and boundary measurements are fixed by the synthetic dataset generated with the forward solver. For a grid of size N×NN\times N, the number of unique boundary nodes is
+%     \[
+%     N_b = 4N-4.
+%     \]
+%     In the typical setup used in this work, N=64N=64, hence Nb=252N_b=252. For each of the KK imposed boundary conditions, the dataset therefore contains one pair of boundary functions (fk,Jk)(f_k,J_k) evaluated at these NbN_b boundary nodes.
+
+%     \item \textbf{Mini-batching on the set of BCs}. During training, the full set of boundary samples is flattened over both the boundary nodes and the boundary-condition index kk, shuffled, and processed in mini-batches of size
+%     \[
+%     N_{\mathrm{bnd}}=1024.
+%     \]
+%     Thus, one epoch corresponds to a full pass through the fixed boundary dataset. The number of boundary mini-batches per epoch is
+%     \[
+%     \left[ \frac{K(4N-4)}{1024} \right].  
+%     \]
+
+%     \item \textbf{NNs architecture} The unetu_{net} NN has 6 layers, each consisting of 256 neurons. The γnet\gamma_{net} NN constitutes of 4 layers of 128 neurons each. Both are followed by a scalar output layer which we pass to a sigmoid.
+    
+%     \item \textbf{Meaning of one epoch.} In each boundary mini-batch, the code performs the following steps:
+%     \begin{enumerate}
+%         \item draw one mini-batch of boundary samples from the fixed dataset;
+%         \item sample a fresh batch of interior collocation points;
+%         \item evaluate the PDE residual on the interior batch;
+%         \item evaluate the Dirichlet and Neumann residuals on the boundary batch;
+%         \item combine the loss terms and perform one optimizer update.
+%     \end{enumerate}
+    
+%     Therefore, the PDE collocation points are resampled many times within a single epoch ($ \left[K(4N-4)/{1024}\right]$ times), whereas the boundary data are fixed but visited through shuffled mini-batches.
+
+
+%     \item \textbf{Conditioning on the boundary-condition index.} The potential network is conditioned on the boundary-condition label $k$ through a one-hot vector $\mathbf e_k \in \mathbb{R}^K$. This one-hot encoding is concatenated to the Fourier-feature representation of the spatial coordinates and fed as input to the $u$-network. In this way, a single shared neural network represents the whole family of potentials $\{u_k\}_{k=1}^K$.
+
+%     \item \textbf{Role of the one-hot encoding.} The one-hot vector $\hat{\mathbf{e}}_{k}$ (see Fig. \ref{fig: pinns setup}) does not introduce new spatial information; rather, it tells the network which boundary excitation is being considered. The network therefore learns a conditional map
+%     \[
+%     (x,y,\mathbf e_k)\mapsto u_k^{\mathrm{NN}}(x,y),
+%     \]
+%     instead of training a separate neural network for each $k$.
+
+%     \item \textbf{PDE residual over different boundary conditions.} Since the $u$-network depends on $k$, the PDE residual is evaluated on randomly sampled triplets $(x,y,k)$. That is, each sampled interior point is paired with a randomly chosen boundary-condition label, and the residual
+%     \[
+%     \nabla\cdot\left(\gamma^{\mathrm{NN}}(x,y)\nabla u_k^{\mathrm{NN}}(x,y)\right)
+%     \]
+%     is enforced for that pair. This provides a stochastic approximation to the PDE loss averaged over both the spatial domain and the set of boundary conditions.
+
+%     \item \textbf{Outward normals and Neumann data}. The synthetic dataset stores the outward unit normal vector $n$ at each boundary node. These normals are used to compute the normal derivative through
+%     \[
+%     \partial_n u = \nabla u \cdot n,
+%     \]
+%     so that the predicted current is
+%     \[
+%     J_k^{\mathrm{NN}} = \gamma^{\mathrm{NN}}\,\partial_n u_k^{\mathrm{NN}}.
+%     \]
+%     Hence, the normals enter the loss construction through the Neumann term.
+
+%     \item \textbf{Conductivity output range.} The conductivity network outputs a single scalar field $\gamma^{\mathrm{NN}}(x,y)$, common to all boundary conditions. Its final output is reparametrized through a sigmoid and then rescaled to a prescribed interval $[\gamma_{\min},\gamma_{\max}]$. The presence of this rescaling is physically motivated; the conductivity cannot be zero, thus the presence of $\gamma_\text{min}$. Further, we assume we are not working with superconductors, so we set an upper bound $\gamma_\text{max}$. This value is, however, much larger than the maximum true value, to ensure that the recovery is not affected by the saturation of this bound. In the experiments considered here, $\gamma_{\min}=0.5$, while $\gamma_{\max}$ is chosen depending on the conductivity profile under consideration, rather than being fixed universally across all runs.
+
+
+%     \item \textbf{Optimizer and scheduler.} Training is performed with the \texttt{Adam} optimizer, using learning rate
+%     \[
+%     \eta = 10^{-4}.
+%     \]
+%     Since no custom Adam coefficients are specified in the implementation, the default values
+%     \[
+%     \beta_1=0.9,\qquad \beta_2=0.999
+%     \]
+%     are used. An exponential learning-rate scheduler is applied, with decay factor $0.95$ every $N$ epochs, depending on the profile.
+
+%     \item \textbf{Loss weights.} The implemented total loss contains separate contributions from the PDE residual, the Dirichlet residual, and the Neumann residual:
+%     \[
+%     L = \lambda_{\mathrm{PDE}}L_{\mathrm{PDE}}+\lambda_f L_f+\lambda_J L_J,
+%     \]
+%     together with an optional auxiliary term forcing the true conductivity in debugging or sanity-check runs. In the main runs discussed here, the weights are
+%     \[
+%     \lambda_{\mathrm{PDE}}=1,\qquad \lambda_f=10, 1000\qquad \lambda_J=10.
+%     \]
+%     where for some profiles we use $\lambda_f = 10$ and for others we use $\lambda_f = 1000$. Consult table \ref{tab:training_losses}.
+
+% \end{itemize}
+
+% \subsubsection{Specifications-more brief}
+% \begin{itemize}
+%     \item Interior collocation points in Ω\Omega are randomly resampled at every optimization step. In the runs presented in this work, uniform random sampling in [0,1]2[0,1]^2 was used, although the code also supports center-biased sampling strategies.
+    
+%     \item Boundary coordinates, outward normals, and boundary measurements are fixed by the synthetic dataset generated with the forward solver. During training, however, shuffled minibatches are drawn from this fixed set of boundary samples.
+    
+%     \item Optimization is performed with the \texttt{Adam} optimizer, using learning rate η=10−4\eta=10^{-4}. Since no custom Adam coefficients are specified in the implementation, the default values β1=0.9\beta_1=0.9 and β2=0.999\beta_2=0.999 are used.
+    
+%     \item A multiplicative exponential learning-rate scheduler is employed, with decay factor 0.950.95 applied every 50005000 epochs.(changes sometimes)
+    
+%     \item The total loss is implemented with separate weights for the PDE, Dirichlet, and Neumann terms. In the runs shown here, these were set to λPDE=1\lambda_{\mathrm{PDE}}=1, λf=10\lambda_f=10, and λJ=10\lambda_J=10. (λf=1000\lambda_f=1000 sometimes)
+    
+%     \item The index kk labeling the boundary condition is encoded through a one-hot vector ek\mathbf e_k, which is concatenated to the Fourier-feature representation of the spatial coordinates and fed to the uu-network. This allows a single shared network to represent the family of potentials {uk}Kk=1\{u_k\}_{k=1}^K.
+    
+%     \item The conductivity network depends only on the spatial coordinates and outputs a single conductivity field γNN(x,y)\gamma^{\mathrm{NN}}(x,y) shared across all boundary conditions.
+    
+%     \item The output of the conductivity network is passed through a sigmoid and then rescaled to a prescribed interval [γmin[\gamma_{\min},\gamma_{\max}]. In our experiments, \gamma_{\min}=0.5\gamma_{\min}=0.5, while \gamma_{\max}\gamma_{\max} was chosen depending on the conductivity profile under consideration.
+% \end{itemize}
