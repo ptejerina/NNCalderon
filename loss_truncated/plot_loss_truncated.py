@@ -8,7 +8,7 @@ import matplotlib.pyplot as plt
 # Settings
 # ---------------------------------------------------
 
-checkpoint_path = "NN_epochs_231000"
+checkpoint_path = "NN_epochs_321000"
 
 # First epoch to display.
 # For example:
@@ -18,7 +18,7 @@ checkpoint_path = "NN_epochs_231000"
 start_epoch = 100
 
 output_path = (
-    f"all_losses_epoch_231000_from_epoch_{start_epoch}.pdf"
+    f"all_losses_epoch_321000_from_epoch_{start_epoch}.pdf"
 )
 
 
