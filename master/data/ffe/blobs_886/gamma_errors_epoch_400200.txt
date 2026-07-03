@@ -1,0 +1,6 @@
+epoch	400200
+mse_gamma	1.38906268e-02
+rmse_gamma	1.17858507e-01
+mae_gamma	9.61929858e-02
+max_abs_gamma_error	3.53470802e-01
+mean_relative_error_percent	6.82809874e+00
