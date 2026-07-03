@@ -40,7 +40,7 @@ data/
 └── NN_epochs_xxx
 ```
 
-### `Data_generation.ipynb`
+##### `Data_generation.ipynb`
 Notebook for generating synthetic Dirichlet-to-Neumann (DtN) datasets for a chosen ground-truth conductivity (multiple examples used in the paper are included). It uses `fdm_forward_solver.py`, a finite-difference forward solver that simulates boundary measurements and generates the corresponding synthetic training data.
 
 ### `NNCalderon_rutine.py`
