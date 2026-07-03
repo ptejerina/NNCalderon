@@ -14,7 +14,7 @@ The method represents the unknown conductivity field $\gamma(x)$ and the interna
       $$\nabla\cdot\left(\gamma(x)\,\nabla u_k(x)\right) = 0 \ ,$$
 
 - a finite set of Dirichlet boundary conditions: 
-      $$u_k(x)|_{\partial\Omega} = f_k \ \ \ \text{with} \ \ \  k=1,\dots, K \, ,$$
+      $$u_k(x)|_{\partial\Omega} = f_k \ \ \ \text{with} \ \ \  k=1,\dots, K \ ,$$
 
 - the corresponding set of Neumann (Dirichlet-to-Neumann) measurements: 
       $$\Lambda_\gamma(f_k) = \left[ \gamma(x)\frac{\partial u_k}{\partial \hat{n}} \right]_{\partial\Omega}\equiv J_k \ .$$
@@ -25,7 +25,7 @@ The framework supports both raw-coordinate inputs to the NNs and Fourier Feature
 ---
 
 ## Repository Structure
-```
+``
 master/
 │
 ├── `Data_generation.ipynb`
@@ -55,7 +55,7 @@ data/
 └── `NN_epochs_xxx`
     NN parameters (weights and biases), optimizer state, and training history for the trained models in [our work](https://arxiv.org/abs/2606.28158) at the indicated epoch.
 
-```
+``
 ---
 
 ## Workflow
