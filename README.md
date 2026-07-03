@@ -35,24 +35,52 @@ master/
 └── NNCalderon_TRAIN.py
 
 data/
+├── ffe/
+│   │
+│   ├── inclusion_r_02/
+│   │   │
+│   │   ├── dtn_data_<case>.npz
+│   │   └── NN_epochs_xxx
+│   │
+│   ├── inclusion_r_015/
+│   │   │
+│   │   ├── ...
+│   │   └── ...
+│   ├── inclusion_r_01/
+│   ├── two_inclusions/
+│   ├── horizontal_split/
+│   ├── gaussian_inclusion_R_01/
+│   ├── gaussian_inclusion_R_02/
+│   ├── shifted_inverse_gaussian/
+│   ├── radial_sine/
+│   ├── blobs_825/
+│   ├── blobs_886/
+│   ├── fourierboard/
+│   ├── random_119/
+│   └── random_541/
 │
-├── dtn_data_single_inclusion.npz
-└── NN_epochs_xxx
-```
+├── no_ffe/
+│   │
+│   .
+│   .
+└── .
 
+```
+In `master` directory:
 ##### `Data_generation.ipynb`
 Notebook for generating synthetic Dirichlet-to-Neumann (DtN) datasets for a chosen ground-truth conductivity (multiple examples used in the paper are included). It uses `fdm_forward_solver.py`, a finite-difference forward solver that simulates boundary measurements and generates the corresponding synthetic training data.
 
-### `NNCalderon_rutine.py`
+##### `NNCalderon_rutine.py`
 Core implementation of the PINN framework, including neural network architectures, Fourier Feature Encoding (FFE), loss functions, dataset utilities, the training class, and visualization routines.
 
-### `NNCalderon_TRAIN.py`
+##### `NNCalderon_TRAIN.py`
 Example training script demonstrating how to configure and train the PINN for a selected conductivity reconstruction problem.
 
-### `dtn_data_single_inclusion.npz`
+In `data` directory:
+##### `dtn_data_single_inclusion.npz`
 Example dataset containing the Dirichlet-to-Neumann (DtN) measurement pairs used for training, together with the corresponding ground-truth conductivity for evaluating the reconstruction quality (shown here for the single-inclusion case with radius 0.2 times the domain side length).
 
-### `NN_epochs_xxx`
+##### `NN_epochs_xxx`
 Saved model checkpoints containing the neural network parameters (weights and biases), optimizer state, and training history for the models presented in [our work](https://arxiv.org/abs/2606.28158) at the corresponding training epoch.
 
 ---
