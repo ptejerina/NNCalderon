@@ -72,7 +72,7 @@ Core implementation of the PINN framework, including neural network architecture
 Example training script demonstrating how to configure and train the PINN for a selected conductivity reconstruction problem.
 
 
-In `data` directory, one finds directories for FFE and no FFE (raw coordinates). Inside are directories with each of the cases presented in [the paper](https://arxiv.org/abs/2606). Within each, one finds:
+In `data` directory, one finds directories for FFE and no FFE (raw coordinates). Inside are directories with each of the cases presented in the [paper](https://arxiv.org/abs/2606). Within each, one finds:
 - `dtn_data_<case>.npz`
 Example dataset containing the Dirichlet-to-Neumann (DtN) measurement pairs used for training, together with the corresponding ground-truth conductivity for evaluating the reconstruction quality (shown here for the single-inclusion case with radius 0.2 times the domain side length).
 
