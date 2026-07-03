@@ -86,7 +86,7 @@ Saved model checkpoints containing the neural network parameters (weights and bi
 The typical workflow is
 
 1. Generate synthetic DtN data using the finite-difference solver, executed in `Data_generation.ipynb`.
-2. Train the PINN to reconstruct the conductivity field from the generated DtN data-pairs by running `NNCalderon_TRAIN.py` (training parameters are specified here).
+2. Train the PINN to reconstruct the conductivity field from the generated DtN data-pairs by running `NNCalderon_TRAIN.py` (training parameters are specified here). This file executes the full rutine defined in `NNCalderon_rutine.py`.
 3. Evaluate the reconstructed conductivity and visualize the results using the built-in plotting utilities.
 
 ---
