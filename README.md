@@ -1,6 +1,7 @@
 # NNCalderon
 
 [![arXiv](https://img.shields.io/badge/arXiv-2606.28158-b31b1b.svg)](https://arxiv.org/abs/2606.28158) 
+
 This repository contains the implementation accompanying the paper:
 
 > **Recovering Sharp Conductivity Features in the Finite-Data Calderón Problem with Physics-Informed Neural Networks**  
