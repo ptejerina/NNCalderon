@@ -25,23 +25,20 @@ The framework supports both raw-coordinate inputs to the NNs and Fourier Feature
 ---
 
 ## Repository Structure
-``
+
 master/
 │
 ├── `Data_generation.ipynb`
-│   Notebook for generating synthetic Dirichlet-to-Neumann (DtN) datasets for a given ground truth conductivity (to be chosen - multiple options used in the paper are present). 
-│   Uses the `fdm_forward_solver.py` file: Finite-difference forward solver used to simulate boundary measurements and generate synthetic training data.
-│   
-
-├── `NNCalderon_rutine.py`
-│   Core implementation of the PINN framework, including
-│   - neural network architectures,
-│   - Fourier Feature Encoding,
-│   - loss functions,
-│   - dataset utilities,
-│   - training class,
-│   - visualization utilities.
+│   Notebook for generating synthetic Dirichlet-to-Neumann (DtN) datasets
+│   for a chosen ground-truth conductivity (multiple examples used in the
+│   paper are included). It uses `fdm_forward_solver.py`, a finite-difference
+│   forward solver that simulates boundary measurements and generates the
+│   corresponding synthetic training data.
 │
+├── `NNCalderon_rutine.py`
+│   Core implementation of the PINN framework, including neural network
+│   architectures, Fourier Feature Encoding (FFE), loss functions, dataset
+│   utilities, the training class, and visualization routines.
 │
 └── `NNCalderon_TRAIN.py`
     Example training script demonstrating how to configure and train the
@@ -49,13 +46,18 @@ master/
 
 data/
 │
-├── `dtn_data_single_inclusion.npz` (e.g. for the single inclusion case wit radius 0.2 of the box-length).
-│    File with the DtN data-pairs used in training for the conductivity reconstruction, and ground truth conductivity for evaluation of the reconstruction quality.
+├── `dtn_data_single_inclusion.npz`
+│   Example dataset containing the Dirichlet-to-Neumann (DtN) measurement
+│   pairs used for training, together with the corresponding ground-truth
+│   conductivity for evaluating the reconstruction quality. (Shown here for
+│   the single-inclusion case with radius 0.2 times the domain side length.)
 │
 └── `NN_epochs_xxx`
-    NN parameters (weights and biases), optimizer state, and training history for the trained models in [our work](https://arxiv.org/abs/2606.28158) at the indicated epoch.
-
-``
+    Saved model checkpoints containing the neural network parameters
+    (weights and biases), optimizer state, and training history for the
+    models presented in [our work](https://arxiv.org/abs/2606.28158) at the
+    corresponding training epoch.
+    
 ---
 
 ## Workflow
