@@ -26,38 +26,35 @@ The framework supports both raw-coordinate inputs to the NNs and Fourier Feature
 
 ## Repository Structure
 
+```text
 master/
 │
-├── `Data_generation.ipynb`
-│   Notebook for generating synthetic Dirichlet-to-Neumann (DtN) datasets
-│   for a chosen ground-truth conductivity (multiple examples used in the
-│   paper are included). It uses `fdm_forward_solver.py`, a finite-difference
-│   forward solver that simulates boundary measurements and generates the
-│   corresponding synthetic training data.
-│
-├── `NNCalderon_rutine.py`
-│   Core implementation of the PINN framework, including neural network
-│   architectures, Fourier Feature Encoding (FFE), loss functions, dataset
-│   utilities, the training class, and visualization routines.
-│
-└── `NNCalderon_TRAIN.py`
-    Example training script demonstrating how to configure and train the
-    PINN for a selected conductivity reconstruction problem.
+├── Data_generation.ipynb
+├── fdm_forward_solver.py
+├── NNCalderon_rutine.py
+└── NNCalderon_TRAIN.py
 
 data/
 │
-├── `dtn_data_single_inclusion.npz`
-│   Example dataset containing the Dirichlet-to-Neumann (DtN) measurement
-│   pairs used for training, together with the corresponding ground-truth
-│   conductivity for evaluating the reconstruction quality. (Shown here for
-│   the single-inclusion case with radius 0.2 times the domain side length.)
-│
-└── `NN_epochs_xxx`
-    Saved model checkpoints containing the neural network parameters
-    (weights and biases), optimizer state, and training history for the
-    models presented in [our work](https://arxiv.org/abs/2606.28158) at the
-    corresponding training epoch.
-    
+├── dtn_data_single_inclusion.npz
+└── NN_epochs_xxx
+```
+
+### `Data_generation.ipynb`
+Notebook for generating synthetic Dirichlet-to-Neumann (DtN) datasets for a chosen ground-truth conductivity (multiple examples used in the paper are included). It uses `fdm_forward_solver.py`, a finite-difference forward solver that simulates boundary measurements and generates the corresponding synthetic training data.
+
+### `NNCalderon_rutine.py`
+Core implementation of the PINN framework, including neural network architectures, Fourier Feature Encoding (FFE), loss functions, dataset utilities, the training class, and visualization routines.
+
+### `NNCalderon_TRAIN.py`
+Example training script demonstrating how to configure and train the PINN for a selected conductivity reconstruction problem.
+
+### `dtn_data_single_inclusion.npz`
+Example dataset containing the Dirichlet-to-Neumann (DtN) measurement pairs used for training, together with the corresponding ground-truth conductivity for evaluating the reconstruction quality (shown here for the single-inclusion case with radius 0.2 times the domain side length).
+
+### `NN_epochs_xxx`
+Saved model checkpoints containing the neural network parameters (weights and biases), optimizer state, and training history for the models presented in [our work](https://arxiv.org/abs/2606.28158) at the corresponding training epoch.
+
 ---
 
 ## Workflow
