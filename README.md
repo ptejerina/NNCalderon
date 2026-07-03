@@ -1,20 +1,20 @@
-# Recovering Sharp Conductivity Features in the Finite-Data Calderón Problem with Physics-Informed Neural Networks
+# NNCalderon
 
-This repository contains the implementation accompanying the paper [![arXiv](https://img.shields.io/badge/arXiv-2606.28158-b31b1b.svg)](https://arxiv.org/abs/2606.28158)
+[![arXiv](https://img.shields.io/badge/arXiv-2606.28158-b31b1b.svg)](https://arxiv.org/abs/2606.28158) This repository contains the implementation accompanying the paper 
 
 > **Recovering Sharp Conductivity Features in the Finite-Data Calderón Problem with Physics-Informed Neural Networks**  
 
 ## Overview
 
-This repository implements a Physics-Informed Neural Network (PINN) framework for tackling the finite-data Calderón inverse problem (Electrical Impedance Tomography) from boundary measurements in a 2D square domain.
+This repository implements a Physics-Informed Neural Network (PINN) framework for tackling the Calderón inverse problem from finite-data given by boundary measurements in a 2D square domain (also commonly referred to as "Electrical Impedance Tomography").
 
-The method represents the unknown conductivity field $\gamma(x)$ and the corresponding induced electric potential $u(x)$ using separate neural networks trained simultaneously by enforcing:
+The method represents the unknown conductivity field $\gamma(x)$ and the internal electric potential $u(x)$ using separate neural networks trained simultaneously by enforcing:
 
 - the governing elliptic PDE: $\nabla\cdot\left(\gamma(x)\,\nabla u(x)\right) = 0 $
 - A finite set of Dirichlet boundary conditions: $ u_k(x)|_{\partial\Omega} = f_k $ with $k=1,\dots, K$.
 - The corresponding set of Neumann (Dirichlet-to-Neumann) measurements: $\Lambda_\gamma(f_k) = \left[ \gamma(x)\frac{\partial u_k}{\partial \hat{n}} \right]_{\partial\Omega}\equiv J_k$.
 
-The framework supports both raw-coordinate neural networks and Fourier Feature Encoding (FFE), the latter showing better reconstruction of conductivity profiles that present sharp features and high-frequency Fourier modes. The paper additionally investigates the influence of multiscale randomized wavelet boundary excitations and Fourier feature embeddings on reconstruction quality.
+The framework supports both raw-coordinate neural networks and Fourier Feature Encoding (FFE), the latter showing better reconstruction of conductivity profiles that present sharp features and high-frequency Fourier modes. The paper additionally investigates the influence of multiscale randomized wavelet boundary excitations and Fourier feature embeddings on reconstruction quality. For details see [this paper](https://arxiv.org/abs/2606.28158).
 
 
 ---
@@ -42,6 +42,8 @@ master/
 └── NNCalderon_TRAIN.py
     Example training script demonstrating how to configure and train the
     PINN for a selected conductivity reconstruction problem.
+
+data/
 ```
 
 ---
