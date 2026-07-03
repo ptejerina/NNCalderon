@@ -12,15 +12,15 @@ The method represents the unknown conductivity field $\gamma(x)$ and the interna
 
 - the governing elliptic PDE: 
 
-        $$\nabla\cdot\left(\gamma(x)\,\nabla u_k(x)\right) = 0 $$
+      $$\nabla\cdot\left(\gamma(x)\,\nabla u_k(x)\right) = 0 \ ,$$
 
-- A finite set of Dirichlet boundary conditions: 
+- a finite set of Dirichlet boundary conditions: 
 
-        $$u_k(x)|_{\partial\Omega} = f_k \ \ \ \text{with} \ \ \  k=1,\dots, K \, .$$
+      $$u_k(x)|_{\partial\Omega} = f_k \ \ \ \text{with} \ \ \  k=1,\dots, K \, ,$$
 
-- The corresponding set of Neumann (Dirichlet-to-Neumann) measurements: 
+- the corresponding set of Neumann (Dirichlet-to-Neumann) measurements: 
 
-        $$\Lambda_\gamma(f_k) = \left[ \gamma(x)\frac{\partial u_k}{\partial \hat{n}} \right]_{\partial\Omega}\equiv J_k$$.
+      $$\Lambda_\gamma(f_k) = \left[ \gamma(x)\frac{\partial u_k}{\partial \hat{n}} \right]_{\partial\Omega}\equiv J_k \ .$$
 
 The framework supports both raw-coordinate inputs to the NNs and Fourier Feature Encoding (FFE), a transformation of the input space to a higher-dimensional space populated with frequencies sampled from a random Gaussian distribution. The latter shows better reconstruction of conductivity profiles that present sharp features and high-frequency Fourier modes. The paper investigates the influence of multiscale randomized wavelet boundary excitations and FFE on reconstruction quality. For details see [this paper](https://arxiv.org/abs/2606.28158).
 
